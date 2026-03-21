@@ -1,28 +1,17 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>Minha Jornada</title>
     <link rel="icon" type="image/png" href="favicon.png">
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
         body {
             margin: 0;
-            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial;
             color: white;
             text-align: center;
             overflow-x: hidden;
-            background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #0f2027);
-            background-size: 400% 400%;
-            animation: gradientBG 20s ease infinite;
-        }
-
-        @keyframes gradientBG {
-            0% {background-position: 0% 50%;}
-            50% {background-position: 100% 50%;}
-            100% {background-position: 0% 50%;}
         }
 
         .container {
@@ -30,11 +19,104 @@
             max-width: 900px;
             margin-left: auto;
             margin-right: auto;
+            padding: 0 20px;
         }
 
         .logo {
             width: 80px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 50px;
             margin-bottom: 20px;
+            animation: fadeIn 2s ease forwards;
+        }
+
+        .timeline {
+            position: relative;
+            margin: 50px 0;
+            padding-left: 20px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #00c6ff;
+            border-radius: 2px;
+        }
+
+        .event {
+            position: relative;
+            margin-bottom: 40px;
+            padding-left: 50px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideIn 1s ease forwards;
+        }
+
+        .event:nth-child(1) { animation-delay: 0.3s; }
+        .event:nth-child(2) { animation-delay: 0.6s; }
+        .event:nth-child(3) { animation-delay: 0.9s; }
+        .event:nth-child(4) { animation-delay: 1.2s; }
+
+        .event span {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #00c6ff;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-left: -50px;
+            color: #0f2027;
+            font-size: 22px;
+        }
+
+        .event h3 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .event p {
+            margin: 5px 0 0 0;
+            font-size: 18px;
+        }
+
+        .btn {
+            margin-top: 40px;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            background: #00c6ff;
+            color: black;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #00a2cc;
+        }
+
+        /* animações */
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* emojis animados */
+        .emoji {
+            display: inline-block;
             animation: bounce 2s infinite;
         }
 
@@ -43,173 +125,51 @@
             50% { transform: translateY(-10px); }
         }
 
-        h1 {
-            font-size: 50px;
-            margin-bottom: 30px;
-            opacity: 0;
-            animation: fadeIn 1s forwards;
-        }
-
-        .card {
-            background: rgba(255,255,255,0.1);
-            padding: 25px;
-            margin: 20px auto;
-            width: 90%;
-            max-width: 350px;
-            border-radius: 15px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeUp 1s forwards;
-            animation-delay: 0.5s;
-        }
-
-        .card:nth-child(2) { animation-delay: 1s; }
-        .card:nth-child(3) { animation-delay: 1.5s; }
-        .card:nth-child(4) { animation-delay: 2s; }
-
-        @keyframes fadeUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
-
-        .emoji {
-            font-size: 40px;
-            animation: float 3s infinite;
-        }
-
-        @keyframes float {
-            0%,100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .timeline {
-            margin-top: 40px;
-            text-align: left;
-            position: relative;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 20px;
-            top: 0;
-            width: 4px;
-            height: 100%;
-            background: #00c6ff;
-            border-radius: 2px;
-        }
-
-        .event {
-            position: relative;
-            margin-left: 50px;
-            margin-bottom: 30px;
-            padding: 10px 20px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-        }
-
-        .event h4 {
-            margin: 0 0 5px 0;
-            font-size: 20px;
-        }
-
-        .event p {
-            margin: 0;
-            font-size: 16px;
-        }
-
-        .btn {
-            margin-top: 30px;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 10px;
-            background: #00c6ff;
-            color: black;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background: #00a2cc;
-        }
-
-        #countdown {
-            font-size: 28px;
-            margin-top: 30px;
-        }
     </style>
 </head>
 
 <body>
+
     <div class="container">
+
+        <!-- Logo do site -->
         <img src="logo.png" class="logo">
-        <h1>Minha Jornada ✈️🇧🇷➡️🇨🇦</h1>
 
-        <div class="card">
-            <h3>🎯 Objetivo</h3>
-            <p>Ir morar no Canadá aos 25 anos</p>
-        </div>
+        <h1>Minha Jornada</h1>
 
-        <div class="card">
-            <h3>📚 Aprendizado</h3>
-            <p>Programação 💻 | Francês 🇫🇷 | Inglês 🇬🇧</p>
-        </div>
-
-        <div class="card">
-            <h3>🙏 Minha fé</h3>
-            <p>Jesus sempre comigo ✝️</p>
-        </div>
-
-        <!-- Contador regressivo -->
-        <div id="countdown" class="card"></div>
-
-        <!-- Timeline -->
         <div class="timeline">
+
             <div class="event">
-                <h4>2026 - Começo da Jornada</h4>
-                <p>Aprendendo programação e francês</p>
+                <span class="emoji">🎯</span>
+                <h3>Objetivo</h3>
+                <p>Morar no Canadá aos 25 anos 🇨🇦</p>
             </div>
+
             <div class="event">
-                <h4>2028 - Nível Avançado</h4>
-                <p>Projetos mais complexos e prática constante</p>
+                <span class="emoji">📚</span>
+                <h3>Aprendizado</h3>
+                <p>Programação 💻 e Inglês/Francês 📝</p>
             </div>
+
             <div class="event">
-                <h4>2030 - Chegada ao Canadá</h4>
-                <p>Nova vida e novas oportunidades 🇨🇦</p>
+                <span class="emoji">🔥</span>
+                <h3>Motivação</h3>
+                <p>Construir um futuro incrível 🚀</p>
             </div>
+
+            <div class="event">
+                <span class="emoji">✨</span>
+                <h3>Trilha</h3>
+                <p>Linha de progresso contínuo até a viagem 🎒</p>
+            </div>
+
         </div>
 
         <button class="btn" onclick="window.location.href='index.html'">
             Voltar
         </button>
+
     </div>
 
-    <script>
-        // Contador regressivo até o dia 6/04/2035 (quando você tiver 25 anos)
-        const countDate = new Date("Apr 6, 2035 00:00:00").getTime();
-        const countdownEl = document.getElementById("countdown");
-
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = countDate - now;
-
-            const years = Math.floor(distance / (1000*60*60*24*365));
-            const days = Math.floor((distance % (1000*60*60*24*365)) / (1000*60*60*24));
-            const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
-            const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
-            const seconds = Math.floor((distance % (1000*60)) / 1000);
-
-            countdownEl.innerHTML = `⏳ ${years} anos ${days} dias ${hours}h ${minutes}m ${seconds}s até a viagem!`;
-        }
-
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-    </script>
 </body>
 </html>
