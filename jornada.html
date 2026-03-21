@@ -5,48 +5,134 @@
     <link rel="icon" type="image/png" href="favicon.png">
 
     <style>
+        /* FONTES E COR */
         body {
             margin: 0;
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial;
             color: white;
             text-align: center;
+            overflow-x: hidden;
+            background: linear-gradient(270deg, #0f2027, #203a43, #2c5364);
+            background-size: 600% 600%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
         }
 
         .container {
             margin-top: 100px;
         }
 
+        /* LOGO */
         .logo {
             width: 80px;
             margin-bottom: 20px;
+            transition: transform 0.5s;
         }
 
+        .logo:hover {
+            transform: scale(1.2);
+        }
+
+        /* TITULO */
         h1 {
             font-size: 45px;
+            margin-bottom: 40px;
+        }
+
+        /* TIMELINE */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto 50px auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: #00c6ff;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
         }
 
         .card {
+            padding: 20px 30px;
             background: rgba(255,255,255,0.1);
-            padding: 25px;
-            margin: 20px auto;
-            width: 300px;
-            border-radius: 15px;
+            position: relative;
+            border-radius: 10px;
+            width: 45%;
+            margin: 20px 0;
+            color: white;
+            text-align: left;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            transition: transform 0.5s, box-shadow 0.5s;
         }
 
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+
+        .card-left {
+            left: 0;
+        }
+
+        .card-right {
+            left: 55%;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #00c6ff;
+            border-radius: 50%;
+            top: 20px;
+            right: -10px;
+            border: 4px solid white;
+        }
+
+        .card-right::before {
+            left: -10px;
+            right: auto;
+        }
+
+        /* BOTÃO */
         .btn {
             margin-top: 30px;
-            padding: 10px 20px;
+            padding: 12px 25px;
             border: none;
             border-radius: 10px;
             background: #00c6ff;
             color: black;
-            font-size: 16px;
+            font-size: 18px;
             cursor: pointer;
         }
 
         .btn:hover {
             background: #00a2cc;
+        }
+
+        @media screen and (max-width: 800px){
+            .card, .card-right, .card-left {
+                width: 80%;
+                left: 10%;
+            }
+            .timeline::after {
+                left: 10%;
+            }
+            .card::before, .card-right::before {
+                left: -10px;
+                right: auto;
+            }
         }
     </style>
 </head>
@@ -59,19 +145,28 @@
 
         <h1>Minha Jornada 🇨🇦</h1>
 
-        <div class="card">
-            <h3>🎯 Objetivo</h3>
-            <p>Ir morar no Canadá</p>
-        </div>
+        <div class="timeline">
 
-        <div class="card">
-            <h3>📚 O que estou fazendo</h3>
-            <p>Aprendendo programação 💻</p>
-        </div>
+            <div class="card card-left">
+                <h3>🎯 Objetivo</h3>
+                <p>Ir morar no Canadá e aprender novas culturas</p>
+            </div>
 
-        <div class="card">
-            <h3>🔥 Motivação</h3>
-            <p>Construir um futuro melhor</p>
+            <div class="card card-right">
+                <h3>📚 O que estou fazendo</h3>
+                <p>Aprendendo programação, inglês e desenvolvendo projetos</p>
+            </div>
+
+            <div class="card card-left">
+                <h3>🔥 Motivação</h3>
+                <p>Construir um futuro melhor e inspirar outras pessoas</p>
+            </div>
+
+            <div class="card card-right">
+                <h3>💡 Próximos Passos</h3>
+                <p>Planejar viagem, criar portfólio e praticar habilidades</p>
+            </div>
+
         </div>
 
         <button class="btn" onclick="window.location.href='index.html'">
