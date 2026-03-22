@@ -7,22 +7,36 @@
         body {
             margin: 0;
             height: 100vh;
+            overflow: hidden;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
             font-family: Arial, sans-serif;
             color: white;
+            flex-direction: column;
             text-align: center;
         }
 
         h1 {
             font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        #score {
+            font-size: 36px;
+            font-weight: bold;
+            margin: 20px;
+            transition: color 0.3s;
+        }
+
+        #speed {
+            font-size: 18px;
             margin-bottom: 20px;
         }
 
         button {
+            position: absolute;
             padding: 15px 30px;
             font-size: 18px;
             border: none;
@@ -30,7 +44,6 @@
             cursor: pointer;
             background: #00c6ff;
             color: black;
-            margin: 10px;
             transition: 0.3s;
         }
 
@@ -38,28 +51,85 @@
             background: #00a2cc;
         }
 
-        #score {
+        .star {
+            position: absolute;
             font-size: 30px;
-            margin-top: 20px;
+            animation: sparkle 1s infinite alternate;
+        }
+
+        @keyframes sparkle {
+            from { transform: scale(1); }
+            to { transform: scale(1.5); }
         }
     </style>
 </head>
 <body>
+
     <h1>Jogo da Jornada</h1>
-    <p>Clique no botão o máximo de vezes para marcar pontos!</p>
-    <button id="gameBtn">Clique aqui!</button>
     <div id="score">Pontuação: 0</div>
-    <button onclick="window.location.href='index.html'">Voltar</button>
+    <div id="speed">Velocidade: 0 clicks/seg</div>
+    <button id="gameBtn">Clique aqui!</button>
+    <button style="position: fixed; bottom: 20px;" onclick="window.location.href='jornada.html'">Voltar</button>
 
     <script>
         let score = 0;
+        let multiplier = 1;
+        let clicksInLastSecond = 0;
+        let lastTime = Date.now();
+        let highScore = 0;
+
         const btn = document.getElementById('gameBtn');
         const scoreDisplay = document.getElementById('score');
+        const speedDisplay = document.getElementById('speed');
 
+        // Botão cliques
         btn.addEventListener('click', () => {
-            score++;
+            score += multiplier;
+            clicksInLastSecond++;
             scoreDisplay.textContent = "Pontuação: " + score;
+
+            // Atualiza cor de record
+            if(score < 100) scoreDisplay.style.color = "green";
+            else if(score < 1000) scoreDisplay.style.color = "yellow";
+            else if(score < 10000) scoreDisplay.style.color = "orange";
+            else scoreDisplay.style.color = "red";
+
+            if(score > highScore) highScore = score;
         });
+
+        // Move botão a cada 10s
+        setInterval(() => {
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            btn.style.left = x + "px";
+            btn.style.top = y + "px";
+        }, 10000);
+
+        // Aparece estrela a cada 20s
+        setInterval(() => {
+            const star = document.createElement('div');
+            star.className = "star";
+            star.style.left = Math.random() * (window.innerWidth - 30) + "px";
+            star.style.top = Math.random() * (window.innerHeight - 30) + "px";
+            star.textContent = "⭐";
+            document.body.appendChild(star);
+
+            multiplier++; // cada estrela aumenta x1 no multiplicador
+
+            setTimeout(() => {
+                star.remove();
+            }, 5000); // some depois de 5s
+        }, 20000);
+
+        // Medidor de velocidade (clicks por segundo)
+        setInterval(() => {
+            const now = Date.now();
+            const diff = (now - lastTime) / 1000; // segundos
+            const cps = Math.round(clicksInLastSecond / diff);
+            speedDisplay.textContent = `Velocidade: ${cps} clicks/seg`;
+            clicksInLastSecond = 0;
+            lastTime = now;
+        }, 1000);
     </script>
 </body>
 </html>
