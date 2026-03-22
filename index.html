@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Janderf_dev</title>
     <link rel="icon" href="favicon.png">
+    <!-- Essencial para responsividade -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
         /* ===== RESET E FONTES ===== */
         * { margin:0; padding:0; box-sizing:border-box; }
@@ -39,7 +42,7 @@
 
         /* ===== TÍTULO ===== */
         h1 {
-            font-size: 50px;
+            font-size: clamp(24px, 5vw, 50px);
             margin-bottom: 20px;
             text-shadow: 0 0 10px rgba(0,198,255,0.5);
             opacity: 0;
@@ -47,7 +50,7 @@
         }
 
         p.description {
-            font-size: 20px;
+            font-size: clamp(14px, 4vw, 20px);
             color: #ccc;
             max-width: 800px;
             margin: 0 auto 50px;
@@ -111,7 +114,8 @@
             background: rgba(255,255,255,0.05);
             padding: 25px;
             margin: 20px auto;
-            width: 320px;
+            width: 90%;
+            max-width: 350px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             opacity: 0;
@@ -159,6 +163,14 @@
         @keyframes fadeIn { to { opacity: 1; } }
         @keyframes bounce { from { transform: translateY(0px); } to { transform: translateY(-15px); } }
         @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
+
+        /* ===== RESPONSIVIDADE ===== */
+        @media (max-width: 600px) {
+            .container { padding: 50px 10px; }
+            .timeline { flex-direction: column; align-items: center; }
+            .timeline::before { width: 4px; height: 90%; left: 50%; top: 5%; }
+            .point { margin-bottom: 20px; }
+        }
     </style>
 </head>
 <body>
