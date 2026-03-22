@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="icon" href="favicon.png">
-    <title>janderf/dev</title>
+    <title>janderf_dev</title>
 
     <style>
         /* ===== RESET E FONTES ===== */
@@ -161,7 +161,7 @@
         <!-- TÍTULO E DESCRIÇÃO -->
         <h1>Início</h1>
         <p class="description">
-            Guia completo para me tornar um dos melhores programadores de TI, TI, explorar novas culturas e conquistar experiências incríveis pelo mundo.
+            Guia completo para me tornar um dos melhores programadores de TI, explorar novas culturas e conquistar experiências incríveis pelo mundo.
 
         <!-- TIMELINE DIVERTIDA -->
         <div class="timeline">
