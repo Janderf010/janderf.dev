@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Janderf_dev</title>
     <link rel="icon" href="favicon.png">
-
     <style>
         /* ===== RESET E FONTES ===== */
         * { margin:0; padding:0; box-sizing:border-box; }
@@ -107,6 +106,7 @@
         }
 
         /* ===== CARDS ESTILO APPLE ===== */
+        a { text-decoration: none; color: inherit; }
         .card {
             background: rgba(255,255,255,0.05);
             padding: 25px;
@@ -117,6 +117,12 @@
             opacity: 0;
             transform: translateY(30px);
             animation: fadeUp 1s forwards;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0,198,255,0.6);
+            background: rgba(255,255,255,0.1);
         }
         .card:nth-child(1) { animation-delay: 0.5s; }
         .card:nth-child(2) { animation-delay: 1s; }
@@ -189,20 +195,27 @@
         </div>
 
         <!-- CARDS DE PROJETOS -->
-        <div class="card">
-            <h3>Projetos</h3>
-            <p>Mostra os sites, apps ou jogos que criei. Cada projeto com título, descrição e link para ver funcionando.</p>
-        </div>
+        <a href="projetos.html">
+            <div class="card">
+                <h3>Projetos</h3>
+                <p>Mostra os sites, apps ou jogos que criei. Cada projeto com título, descrição e link para ver funcionando.</p>
+            </div>
+        </a>
 
-        <div class="card">
-            <h3>Skills & Habilidades</h3>
-            <p>HTML, CSS, JavaScript, VS Code, GitHub e design. Cada card mostra o que sei e minhas ferramentas favoritas.</p>
-        </div>
+        <a href="skills.html">
+            <div class="card">
+                <h3>Skills & Habilidades</h3>
+                <p>HTML, CSS, JavaScript, VS Code, GitHub e design. Cada card mostra o que sei e minhas ferramentas favoritas.</p>
+            </div>
+        </a>
 
-        <div class="card">
-            <h3>Conteúdo Educativo</h3>
-            <p>Dicas e tutoriais rápidos, como criar favicon perfeito ou usar GitHub Pages.</p>
-        </div>
-        
+        <a href="educativo.html">
+            <div class="card">
+                <h3>Conteúdo Educativo</h3>
+                <p>Dicas e tutoriais rápidos, como criar favicon perfeito ou usar GitHub Pages.</p>
+            </div>
+        </a>
+
+    </div>
 </body>
 </html>
