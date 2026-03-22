@@ -10,16 +10,16 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial;
             color: #fff;
             background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
-            padding: 50px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
             text-align: center;
+            padding: 20px;
         }
+        .container { width: 100%; max-width: 800px; }
 
-        h1 { 
-            color: #00c6ff; 
-            margin-bottom: 30px; 
-            font-size: clamp(24px, 6vw, 50px);
-        }
-
+        h1 { color: #00c6ff; font-size: clamp(24px, 6vw, 50px); margin-bottom: 30px; }
         .skill-card {
             background: rgba(255,255,255,0.05);
             padding: 25px;
@@ -28,16 +28,14 @@
             max-width: 400px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
             cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
         }
-
         .skill-card:hover {
             transform: scale(1.05);
             box-shadow: 0 15px 35px rgba(0,198,255,0.6);
             background: rgba(255,255,255,0.1);
         }
-
         pre {
             background: rgba(0,0,0,0.3);
             padding: 15px;
@@ -46,87 +44,43 @@
             font-size: clamp(12px, 3.5vw, 14px);
             margin-top: 15px;
         }
-
-        #output {
-            margin-top: 30px;
-            text-align: left;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+        #output { margin-top: 30px; text-align: left; }
     </style>
 </head>
 <body>
-    <h1>Skills & Habilidades</h1>
+    <div class="container">
+        <h1>Skills & Habilidades</h1>
+        <div class="skill-card" onclick="showHTML()">HTML - Estrutura de páginas</div>
+        <div class="skill-card" onclick="showCSS()">CSS - Estilo e Layout</div>
+        <div class="skill-card" onclick="showJS()">JavaScript - Interatividade</div>
+        <div id="output"></div>
 
-    <div class="skill-card" onclick="showHTML()">
-        <h3>HTML</h3>
-        <p>Clique para ver como criar a estrutura básica de uma página web.</p>
-    </div>
-    <div class="skill-card" onclick="showCSS()">
-        <h3>CSS</h3>
-        <p>Clique para aprender a estilizar sua página e dar efeitos legais.</p>
-    </div>
-    <div class="skill-card" onclick="showJS()">
-        <h3>JavaScript</h3>
-        <p>Clique para entender como tornar sua página interativa.</p>
-    </div>
+        <script>
+            const output = document.getElementById('output');
 
-    <div id="output"></div>
-
-    <script>
-        const output = document.getElementById('output');
-
-        function showHTML() {
-            output.innerHTML = `
-                <h2>HTML Passo a Passo</h2>
-                <pre>
-&lt;!DOCTYPE html&gt;
+            function showHTML() {
+                output.innerHTML = `<h2>HTML</h2><pre>&lt;!DOCTYPE html&gt;
 &lt;html lang="pt-br"&gt;
 &lt;head&gt;
     &lt;meta charset="UTF-8"&gt;
     &lt;title>Minha Página&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
-    &lt;h1&gt;Olá Mundo!&lt;/h1&gt;
-    &lt;p&gt;Minha primeira página web&lt;/p&gt;
+    &lt;h1&gt;Olá Mundo&lt;/h1&gt;
+    &lt;p&gt;Minha primeira página&lt;/p&gt;
 &lt;/body&gt;
-&lt;/html&gt;
-                </pre>
-            `;
-        }
+&lt;/html&gt;</pre>`;
+            }
 
-        function showCSS() {
-            output.innerHTML = `
-                <h2>CSS Passo a Passo</h2>
-                <pre>
-body {
-    background-color: #0f2027;
-    color: #fff;
-    font-family: Arial, sans-serif;
-    text-align: center;
-}
+            function showCSS() {
+                output.innerHTML = `<h2>CSS</h2><pre>body { background-color:#0f2027; color:#fff; font-family:Arial; text-align:center; }
+h1 { color:#00c6ff; text-shadow:0 0 5px #00c6ff; }</pre>`;
+            }
 
-h1 {
-    color: #00c6ff;
-    text-shadow: 0 0 5px #00c6ff;
-}
-                </pre>
-            `;
-        }
-
-        function showJS() {
-            output.innerHTML = `
-                <h2>JavaScript Passo a Passo</h2>
-                <pre>
-console.log("Olá Mundo!");
-
-function mostrarAlerta() {
-    alert("Clicou no botão!");
-}
-                </pre>
-            `;
-        }
-    </script>
+            function showJS() {
+                output.innerHTML = `<h2>JavaScript</h2><pre>console.log("Olá Mundo!"); function mostrarAlerta(){ alert("Clicou no botão!"); }</pre>`;
+            }
+        </script>
+    </div>
 </body>
 </html>
