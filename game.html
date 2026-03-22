@@ -2,139 +2,205 @@
 <html>
 <head>
     <title>Jogo da Jornada</title>
-    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" href="favicon.png">
     <style>
         body {
             margin: 0;
-            height: 100vh;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-            font-family: Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial;
             color: white;
-            flex-direction: column;
-            text-align: center;
+            overflow: hidden;
         }
-
-        h1 {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
-
         #score {
-            font-size: 36px;
-            font-weight: bold;
-            margin: 20px;
-            transition: color 0.3s;
-        }
-
-        #speed {
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-
-        button {
             position: absolute;
-            padding: 15px 30px;
-            font-size: 18px;
-            border: none;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 28px;
+            font-weight: bold;
+            padding: 10px 20px;
             border-radius: 10px;
-            cursor: pointer;
+            background: rgba(0,0,0,0.5);
+        }
+        #timer {
+            position: absolute;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 22px;
+            font-weight: bold;
+            background: rgba(0,0,0,0.5);
+            padding: 5px 15px;
+            border-radius: 10px;
+        }
+        .btn {
+            position: absolute;
+            padding: 15px 25px;
             background: #00c6ff;
             color: black;
-            transition: 0.3s;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
         }
-
-        button:hover {
-            background: #00a2cc;
-        }
-
-        .star {
+        #star {
             position: absolute;
             font-size: 30px;
-            animation: sparkle 1s infinite alternate;
+            display: none;
         }
-
-        @keyframes sparkle {
-            from { transform: scale(1); }
-            to { transform: scale(1.5); }
+        #gameOver {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+            display: none;
+            text-align: center;
+        }
+        #gameOver button {
+            margin-top: 20px;
+            padding: 12px 25px;
+            border-radius: 10px;
+            border: none;
+            background: #00c6ff;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        #multiplier {
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 20px;
+        }
+        #speedMeter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 15px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        #speedFill {
+            height: 100%;
+            width: 0%;
+            background: #00ff00;
+            border-radius: 10px;
+            transition: width 0.2s, background 0.2s;
         }
     </style>
 </head>
 <body>
 
-    <h1>Jogo da Jornada</h1>
     <div id="score">Pontuação: 0</div>
-    <div id="speed">Velocidade: 0 clicks/seg</div>
-    <button id="gameBtn">Clique aqui!</button>
-    <button style="position: fixed; bottom: 20px;" onclick="window.location.href='jornada.html'">Voltar</button>
+    <div id="timer">Tempo: 60</div>
+    <div id="multiplier">x1</div>
+    <div id="speedMeter"><div id="speedFill"></div></div>
+
+    <button id="gameBtn" class="btn">Clique!</button>
+    <div id="star">⭐</div>
+
+    <div id="gameOver">
+        <div>FIM DE JOGO</div>
+        <div id="finalScore" style="margin-top:15px; font-size:28px;"></div>
+        <button onclick="window.location.href='jornada.html'">Voltar</button>
+    </div>
 
     <script>
         let score = 0;
         let multiplier = 1;
-        let clicksInLastSecond = 0;
-        let lastTime = Date.now();
-        let highScore = 0;
+        let time = 60;
+        let starActive = false;
 
         const btn = document.getElementById('gameBtn');
-        const scoreDisplay = document.getElementById('score');
-        const speedDisplay = document.getElementById('speed');
+        const scoreDiv = document.getElementById('score');
+        const timerDiv = document.getElementById('timer');
+        const star = document.getElementById('star');
+        const multiplierDiv = document.getElementById('multiplier');
+        const speedFill = document.getElementById('speedFill');
+        const gameOverDiv = document.getElementById('gameOver');
+        const finalScore = document.getElementById('finalScore');
 
-        // Botão cliques
+        const screenWidth = window.innerWidth;
+        const screenHeight = window.innerHeight;
+
+        // Move button a cada 10 segundos
+        function moveButton() {
+            btn.style.top = Math.random() * (screenHeight-60) + 'px';
+            btn.style.left = Math.random() * (screenWidth-150) + 'px';
+        }
+        setInterval(moveButton, 10000);
+
+        // Spawn estrela a cada 20 segundos
+        function spawnStar() {
+            star.style.top = Math.random() * (screenHeight-40) + 'px';
+            star.style.left = Math.random() * (screenWidth-40) + 'px';
+            star.style.display = 'block';
+            starActive = true;
+        }
+        setInterval(spawnStar, 20000);
+
+        // Contador de tempo
+        let timer = setInterval(() => {
+            time--;
+            timerDiv.textContent = "Tempo: " + time;
+
+            if(time <= 0) endGame();
+        }, 1000);
+
+        // Função fim de jogo
+        function endGame() {
+            btn.style.display = 'none';
+            star.style.display = 'none';
+            gameOverDiv.style.display = 'block';
+            finalScore.textContent = "Pontuação: " + score;
+            clearInterval(timer);
+        }
+
+        // Clique no botão
         btn.addEventListener('click', () => {
-            score += multiplier;
-            clicksInLastSecond++;
-            scoreDisplay.textContent = "Pontuação: " + score;
-
-            // Atualiza cor de record
-            if(score < 100) scoreDisplay.style.color = "green";
-            else if(score < 1000) scoreDisplay.style.color = "yellow";
-            else if(score < 10000) scoreDisplay.style.color = "orange";
-            else scoreDisplay.style.color = "red";
-
-            if(score > highScore) highScore = score;
+            score += 10 * multiplier;
+            updateScore();
         });
 
-        // Move botão a cada 10s
-        setInterval(() => {
-            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
-            btn.style.left = x + "px";
-            btn.style.top = y + "px";
-        }, 10000);
+        // Clique na estrela
+        star.addEventListener('click', () => {
+            multiplier++;
+            multiplierDiv.textContent = 'x' + multiplier;
+            star.style.display = 'none';
+            starActive = false;
+        });
 
-        // Aparece estrela a cada 20s
-        setInterval(() => {
-            const star = document.createElement('div');
-            star.className = "star";
-            star.style.left = Math.random() * (window.innerWidth - 30) + "px";
-            star.style.top = Math.random() * (window.innerHeight - 30) + "px";
-            star.textContent = "⭐";
-            document.body.appendChild(star);
+        // Atualiza score e cores
+        function updateScore() {
+            scoreDiv.textContent = "Pontuação: " + score;
 
-            multiplier++; // cada estrela aumenta x1 no multiplicador
+            // cores
+            if(score < 100) scoreDiv.style.background = "rgba(0,255,0,0.5)";
+            else if(score < 1000) scoreDiv.style.background = "rgba(255,255,0,0.5)";
+            else if(score < 10000) scoreDiv.style.background = "rgba(255,165,0,0.5)";
+            else scoreDiv.style.background = "rgba(255,0,0,0.5)";
 
-            setTimeout(() => {
-                star.remove();
-            }, 5000); // some depois de 5s
-        }, 20000);
+            // adiciona tempo por marco
+            if(score % 1000 === 0 && score > 0) time += 30;
+            if(score % 10000 === 0 && score > 0) time += 30;
 
-        // Medidor de velocidade (clicks por segundo)
-        setInterval(() => {
-            const now = Date.now();
-            const diff = (now - lastTime) / 1000; // segundos
-            const cps = Math.round(clicksInLastSecond / diff);
-            speedDisplay.textContent = `Velocidade: ${cps} clicks/seg`;
-            clicksInLastSecond = 0;
-            lastTime = now;
-        }, 1000);
+            // velocidade
+            let speed = Math.min(score/10000*100, 100);
+            speedFill.style.width = speed + '%';
+            if(speed < 25) speedFill.style.background = '#00ff00';
+            else if(speed < 50) speedFill.style.background = '#ffff00';
+            else if(speed < 75) speedFill.style.background = '#ffa500';
+            else speedFill.style.background = '#ff0000';
+        }
+
+        // Começa com posição aleatória
+        moveButton();
     </script>
 
-    <button class="btn" onclick="window.location.href='index.html'">
-    Voltar
-    </button>
-    
 </body>
 </html>
