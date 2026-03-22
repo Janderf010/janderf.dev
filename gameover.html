@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fim de Jogo</title>
+    <link rel="icon" href="favicon.png">
+    <style>
+        body { background:#222; color:white; font-family:Arial; text-align:center; padding:50px;}
+        .btn { margin:10px; padding:10px 20px; border:none; border-radius:10px; background:#00c6ff; color:black; font-size:16px; cursor:pointer;}
+        .btn:hover { background:#00a2cc; }
+    </style>
+</head>
+<body>
+<h1>Fim de jogo 😢</h1>
+<p>Pontuação final: <span id="finalScore">0</span></p>
+<button class="btn" onclick="window.location.href='jornada.html'">Voltar</button>
+<button class="btn" onclick="window.location.href='game.html'">Jogar de novo</button>
+
+<script>
+// pegar score da URL
+let params = new URLSearchParams(window.location.search);
+let score = params.get('score') || 0;
+document.getElementById('finalScore').textContent = score;
+</script>
+
+</body>
+</html>
