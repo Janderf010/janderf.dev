@@ -4,105 +4,125 @@
     <title>Jogo da Jornada</title>
     <link rel="icon" href="favicon.png">
     <style>
-        body { margin:0; font-family:Arial; background:#0f2027; color:white; text-align:center; }
-        #game-container { position:relative; height:80vh; }
-        #linha { position:absolute; bottom:50px; left:0; width:100%; height:10px; background:blue; }
-        #aviao { position:absolute; bottom:55px; left:0; font-size:40px; transition:left 0.3s; }
-        #pontos-container { margin-top:20px; width:80%; margin:auto; height:30px; background:#333; border-radius:15px; overflow:hidden; }
-        #pontos-bar { height:100%; width:0%; background:green; text-align:center; line-height:30px; color:white; transition: width 0.3s, background 0.3s; }
-        #marcador { margin-top:20px; font-size:20px; }
-        #btn-pontuar { margin-top:30px; padding:15px 30px; font-size:18px; border:none; border-radius:10px; background:#00c6ff; cursor:pointer; }
-        #btn-pontuar:hover { background:#00a2cc; }
-        .estrela { position:absolute; font-size:25px; cursor:pointer; }
+        body { margin: 0; background: #111; color: white; font-family: Arial, sans-serif; overflow: hidden; text-align: center; }
+        #game-container { position: relative; width: 100%; height: 100vh; display: flex; flex-direction: column; justify-content: space-between; }
+        #score-bar { margin: 20px auto; width: 60%; height: 30px; border: 2px solid #fff; border-radius: 15px; position: relative; background: #222; }
+        #score-fill { height: 100%; width: 0%; border-radius: 15px; background: green; text-align: center; line-height: 30px; color: white; font-weight: bold; }
+        #track { position: absolute; bottom: 50px; width: 90%; height: 8px; background: #0071e3; left: 5%; border-radius: 4px; }
+        #player { position: absolute; bottom: 50px; font-size: 30px; left: 0%; transform: translate(-50%, -50%); }
+        #start-timer { position: absolute; top: 40%; width: 100%; font-size: 50px; }
+        #click-btn { position: absolute; bottom: 120px; left: 50%; transform: translateX(-50%); padding: 15px 30px; font-size: 20px; border-radius: 10px; border: none; background: #00c6ff; color: black; cursor: pointer; }
+        #multiplier { position: absolute; top: 10%; left: 50%; transform: translateX(-50%); font-size: 25px; }
+        .star { position: absolute; font-size: 25px; cursor: pointer; }
+        #flags { position: absolute; bottom: 42px; width: 100%; display: flex; justify-content: space-between; font-size: 30px; padding: 0 50px; }
     </style>
 </head>
 <body>
 
-    <h1>Jogo da Jornada</h1>
-    <div id="game-container">
-        <div id="linha"></div>
-        <div id="aviao">✈️</div>
+<div id="game-container">
+    <div id="start-timer">10</div>
+    <div id="multiplier">x1</div>
+    <div id="score-bar"><div id="score-fill">0</div></div>
+    <div id="track"></div>
+    <div id="player">✈️</div>
+    <div id="flags">
+        <div>🇧🇷</div>
+        <div>🇨🇦</div>
     </div>
+    <button id="click-btn">Clique para pontuar</button>
+</div>
 
-    <div id="pontos-container">
-        <div id="pontos-bar">0</div>
-    </div>
-    <div id="marcador">Pontuação: 0 | Tempo: 90s | Multiplicador: x1</div>
-    <button id="btn-pontuar">Clique para Pontuar!</button>
+<script>
+let score = 0;
+let multiplier = 1;
+let timer = 10;
+let intervalStart;
+let gameStarted = false;
+let timeLeft = 90; // 1:30 minutos
+const scoreFill = document.getElementById('score-fill');
+const player = document.getElementById('player');
+const multiplierText = document.getElementById('multiplier');
+const startTimerDiv = document.getElementById('start-timer');
+const clickBtn = document.getElementById('click-btn');
 
-    <script>
-        let pontos = 0;
-        let tempo = 90;
-        let multiplicador = 1;
-        let intervaloTempo = setInterval(atualizaTempo,1000);
-        let btn = document.getElementById('btn-pontuar');
-        let aviao = document.getElementById('aviao');
-        let pontosBar = document.getElementById('pontos-bar');
-        let marcador = document.getElementById('marcador');
-        let gameContainer = document.getElementById('game-container');
-        let estrelaTimeout;
+function updateScore() {
+    let fill = Math.min(score/1000000*100,100);
+    scoreFill.style.width = fill + '%';
 
-        function atualizaTempo(){
-            tempo--;
-            if(tempo<=0){
-                clearInterval(intervaloTempo);
-                window.location.href="gameover.html?score="+pontos;
-            }
-            atualizaMarcador();
+    if(score < 1000) scoreFill.style.background = 'green';
+    else if(score < 10000) scoreFill.style.background = 'yellow';
+    else if(score < 100000) scoreFill.style.background = 'orange';
+    else if(score < 500000) scoreFill.style.background = 'red';
+    else scoreFill.style.background = 'black';
+
+    scoreFill.textContent = score;
+
+    // mover jogador
+    let trackWidth = document.getElementById('track').offsetWidth;
+    player.style.left = (fill) + '%';
+}
+
+clickBtn.onclick = () => {
+    if(!gameStarted) return;
+    score += 1 * multiplier;
+
+    if(score >= 1000 && score%1000 === 0) timeLeft += 20;
+    updateScore();
+    checkWin();
+}
+
+function checkWin() {
+    if(score >= 1000000) {
+        window.location.href = 'jornada.html'; // GANHOU
+    }
+}
+
+function startGame() {
+    startTimerDiv.style.display = 'none';
+    gameStarted = true;
+    const timerInterval = setInterval(() => {
+        timeLeft--;
+        if(timeLeft <=0) {
+            clearInterval(timerInterval);
+            window.location.href='gameover.html?score='+score;
         }
+    },1000);
 
-        function atualizaMarcador(){
-            marcador.innerHTML = `Pontuação: ${pontos} | Tempo: ${tempo}s | Multiplicador: x${multiplicador}`;
-            let perc = Math.min(pontos/1000000*100,100);
-            pontosBar.style.width = perc+"%";
-            if(pontos<1000) pontosBar.style.background="green";
-            else if(pontos<10000) pontosBar.style.background="yellow";
-            else if(pontos<100000) pontosBar.style.background="orange";
-            else if(pontos<500000) pontosBar.style.background="red";
-            else pontosBar.style.background="black";
+    spawnStar();
+}
 
-            // move o avião
-            let pos = Math.min(pontos/1000000*100,100);
-            aviao.style.left = `calc(${pos}% - 20px)`;
-        }
+function spawnStar() {
+    let star = document.createElement('div');
+    star.classList.add('star');
+    star.textContent = '⭐';
+    document.getElementById('game-container').appendChild(star);
 
-        btn.onclick = function(){
-            pontos += 100*multiplicador;
-            if(pontos>=1000) tempo += 20;
-            if(pontos>=1000000){
-                alert("Você chegou no Canadá! 🇨🇦🎉");
-                window.location.href="jornada.html";
-            }
-            btn.disabled = true;
-            setTimeout(()=>{btn.disabled=false; moveBotao();},10000);
-            atualizaMarcador();
-        }
+    function positionStar() {
+        let x = Math.random()*90 + 5 + '%';
+        let y = Math.random()*70 + 10 + '%';
+        star.style.left = x;
+        star.style.top = y;
+    }
+    positionStar();
+    star.onclick = () => {
+        if(multiplier<5) multiplier++;
+        multiplierText.textContent = 'x'+multiplier;
+        star.remove();
+        setTimeout(spawnStar,15000);
+    }
+    setInterval(positionStar,15000);
+}
 
-        function moveBotao(){
-            let x = Math.random()*70;
-            let y = Math.random()*50;
-            btn.style.position="relative";
-            btn.style.left = x+"%";
-            btn.style.top = y+"px";
-        }
+// Contador inicial 10 segundos
+intervalStart = setInterval(() => {
+    startTimerDiv.textContent = timer;
+    timer--;
+    if(timer < 0) {
+        clearInterval(intervalStart);
+        startGame();
+    }
+},1000);
 
-        // gerar estrela a cada 15s
-        setInterval(()=>{
-            let estrela = document.createElement('div');
-            estrela.className="estrela";
-            estrela.style.left = Math.random()*80 + "%";
-            estrela.style.top = Math.random()*50 + "px";
-            estrela.innerHTML="⭐";
-            gameContainer.appendChild(estrela);
-            estrela.onclick=function(){
-                if(multiplicador<5) multiplicador++;
-                estrela.remove();
-                atualizaMarcador();
-            }
-            setTimeout(()=>{estrela.remove();},15000);
-        },15000);
-
-        atualizaMarcador();
-    </script>
+</script>
 </body>
 </html>
