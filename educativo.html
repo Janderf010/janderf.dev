@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Conteúdo Educativo</title>
+    <link rel="icon" href="favicon.png">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial;
+            color: #fff;
+            background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+            padding: 50px;
+            text-align: center;
+        }
+
+        h1 { color: #00c6ff; margin-bottom: 30px; }
+        .tutorial-card {
+            background: rgba(255,255,255,0.05);
+            padding: 25px;
+            margin: 20px auto;
+            width: 400px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+            cursor: pointer;
+        }
+
+        .tutorial-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0,198,255,0.6);
+            background: rgba(255,255,255,0.1);
+        }
+
+        pre {
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+
+        #output {
+            margin-top: 30px;
+            text-align: left;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Conteúdo Educativo</h1>
+
+    <div class="tutorial-card" onclick="showGitHub()">
+        <h3>Como usar GitHub Pages</h3>
+        <p>Clique para ver o passo a passo de como publicar seu site no GitHub.</p>
+    </div>
+
+    <div class="tutorial-card" onclick="showFavicon()">
+        <h3>Como criar e usar um Favicon</h3>
+        <p>Clique para aprender a adicionar aquele ícone na aba do navegador.</p>
+    </div>
+
+    <div id="output"></div>
+
+    <script>
+        const output = document.getElementById('output');
+
+        function showGitHub() {
+            output.innerHTML = `
+                <h2>GitHub Pages Passo a Passo</h2>
+                <pre>
+1️⃣ Crie uma conta no GitHub (https://github.com).
+
+2️⃣ Crie um novo repositório.
+   - Nome do repositório: pode ser "meu-site" ou "usuario.github.io"
+
+3️⃣ Faça upload dos arquivos do seu site (index.html, CSS, imagens, etc.).
+
+4️⃣ Vá em "Settings" &gt; "Pages".
+   - Branch: main
+   - Folder: / (root)
+   - Clique em "Save"
+
+5️⃣ Agora seu site estará disponível em:
+   https://seu-usuario.github.io/nome-do-repositorio/
+                </pre>
+            `;
+        }
+
+        function showFavicon() {
+            output.innerHTML = `
+                <h2>Favicon Passo a Passo</h2>
+                <pre>
+1️⃣ Crie seu ícone em PNG (recomendado 64x64px ou 32x32px).
+
+2️⃣ Converta para .ico se quiser (opcional).
+   - Sites como https://favicon.io ajudam nisso.
+
+3️⃣ Coloque o arquivo na pasta do seu site.
+
+4️⃣ Adicione esta linha dentro do &lt;head&gt; do seu HTML:
+
+   &lt;link rel="icon" href="favicon.ico"&gt;
+
+5️⃣ Salve e publique no GitHub Pages.
+   - O ícone aparecerá na aba do navegador!
+                </pre>
+            `;
+        }
+    </script>
+</body>
+</html>
