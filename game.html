@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jogo da Jornada</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            background: #00c6ff;
+            color: black;
+            margin: 10px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #00a2cc;
+        }
+
+        #score {
+            font-size: 30px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jogo da Jornada</h1>
+    <p>Clique no botão o máximo de vezes para marcar pontos!</p>
+    <button id="gameBtn">Clique aqui!</button>
+    <div id="score">Pontuação: 0</div>
+    <button onclick="window.location.href='jornada.html'">Voltar</button>
+
+    <script>
+        let score = 0;
+        const btn = document.getElementById('gameBtn');
+        const scoreDisplay = document.getElementById('score');
+
+        btn.addEventListener('click', () => {
+            score++;
+            scoreDisplay.textContent = "Pontuação: " + score;
+        });
+    </script>
+</body>
+</html>
