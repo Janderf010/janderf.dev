@@ -2,8 +2,8 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <title>Minha Jornada</title>
     <link rel="icon" href="favicon.png">
-    <title>janderf_dev</title>
 
     <style>
         /* ===== RESET E FONTES ===== */
@@ -158,10 +158,14 @@
 <body>
     <div class="container">
 
+        <!-- LOGO -->
+        <img src="logo.png" class="logo">
+
         <!-- TÍTULO E DESCRIÇÃO -->
-        <h1>Início</h1>
+        <h1>Minha Jornada</h1>
         <p class="description">
-            Guia completo para me tornar um dos melhores programadores de TI, explorar novas culturas e conquistar experiências incríveis pelo mundo.
+            Acompanhe a minha jornada para me tornar um dos melhores programadores do mundo, explorar novas culturas e conquistar experiências incríveis no Canadá.
+        </p>
 
         <!-- TIMELINE DIVERTIDA -->
         <div class="timeline">
@@ -170,8 +174,8 @@
                 <div class="point-text">Largada</div>
             </div>
             <div>
-                <div class="point">📊</div>
-                <div class="point-text">Planejar</div>
+                <div class="point">🇧🇷</div>
+                <div class="point-text">Brasil</div>
             </div>
             <div>
                 <div class="point">🎯</div>
@@ -182,7 +186,7 @@
                 <div class="point-text">Estudos</div>
             </div>
             <div>
-                <div class="point">🏆</div>
+                <div class="point">🇨🇦</div>
                 <div class="point-text">Conquista</div>
             </div>
         </div>
@@ -200,7 +204,7 @@
 
         <div class="card">
             <h3>Conteúdo Educativo</h3>
-            <p>Dicas e tutoriais rápidos, como criar favicon perfeito ou usar GitHub Pages.</p>
+            <p>Dicas e tutoriais rápidos, como criar favicon perfeito ou usar GitHub Pages. Tudo em cards estilo Apple.</p>
         </div>
 
         <!-- BOTÃO VOLTAR -->
