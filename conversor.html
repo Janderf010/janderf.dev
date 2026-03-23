@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Conversor de Moedas</title>
-<link rel="icon" href="favicon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -11,76 +10,52 @@
 <style>
     body {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+        background: #203a43;
         color: #fff;
-        background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
         display: flex;
-        justify-content: center;
+        flex-direction: column;
         align-items: center;
+        justify-content: center;
         min-height: 100vh;
         padding: 20px;
         text-align: center;
     }
 
-    .container {
-        width: 100%;
-        max-width: 400px;
-    }
-
-    h1 {
-        color: #00c6ff;
-        margin-bottom: 20px;
-        font-size: clamp(24px, 6vw, 40px);
-    }
-
-    .card {
-        background: rgba(255,255,255,0.05);
-        padding: 25px;
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        transition: all 0.3s;
-    }
-
-    .card:hover {
-        transform: scale(1.05);
-        box-shadow: 0 15px 35px rgba(0,198,255,0.6);
-        background: rgba(255,255,255,0.1);
-    }
+    h1 { color: #00c6ff; margin-bottom: 20px; }
 
     input, select {
-        width: 100%;
         padding: 12px;
-        margin: 10px 0;
+        margin: 10px;
         border-radius: 12px;
         border: none;
+        width: 220px;
         font-size: 16px;
     }
 
     button {
-        width: 100%;
-        padding: 12px;
-        margin-top: 10px;
+        padding: 12px 20px;
         border-radius: 12px;
         border: none;
         background: #00c6ff;
         color: #111;
         font-size: 16px;
         cursor: pointer;
-        transition: all 0.3s;
+        margin-top: 10px;
+        transition: 0.3s;
     }
 
     button:hover {
         background: #00a2cc;
         transform: translateY(-2px);
-        box-shadow: 0 10px 20px rgba(0,198,255,0.4);
     }
 
     #resultado {
-        margin-top: 15px;
+        margin-top: 20px;
         font-size: 18px;
     }
 
     .voltar {
-        margin-top: 20px;
+        margin-top: 30px;
         background: rgba(255,255,255,0.1);
         color: #fff;
     }
@@ -92,33 +67,30 @@
 </head>
 <body>
 
-<div class="container">
-    <h1>💱 Conversor</h1>
+<h1>💱 Conversor de Moedas</h1>
 
-    <div class="card">
-        <input type="number" id="valor" placeholder="Digite o valor">
+<input type="number" id="valor" placeholder="Digite o valor">
 
-        <select id="origem">
-            <option value="BRL">Real (BRL)</option>
-            <option value="USD">Dólar (USD)</option>
-            <option value="EUR">Euro (EUR)</option>
-        </select>
+<select id="origem">
+    <option value="BRL">Real (BRL)</option>
+    <option value="USD">Dólar (USD)</option>
+    <option value="EUR">Euro (EUR)</option>
+</select>
 
-        <select id="destino">
-            <option value="USD">Dólar (USD)</option>
-            <option value="BRL">Real (BRL)</option>
-            <option value="EUR">Euro (EUR)</option>
-        </select>
+<select id="destino">
+    <option value="USD">Dólar (USD)</option>
+    <option value="BRL">Real (BRL)</option>
+    <option value="EUR">Euro (EUR)</option>
+</select>
 
-        <button onclick="converter()">Converter</button>
+<br>
+<button onclick="converter()">Converter</button>
 
-        <div id="resultado"></div>
-    </div>
+<div id="resultado"></div>
 
-    <button class="voltar" onclick="window.location.href='index.html'">
-        ⬅ Voltar
-    </button>
-</div>
+<button class="voltar" onclick="window.location.href='../projetos.html'">
+⬅ Voltar
+</button>
 
 <script>
 const cotacoes = {
@@ -139,15 +111,14 @@ function converter() {
 
     if (origem === destino) {
         document.getElementById('resultado').innerText =
-            `${valor.toFixed(2)} ${destino}`;
+        `${valor.toFixed(2)} ${destino}`;
         return;
     }
 
-    const taxa = cotacoes[origem][destino];
-    const resultado = valor * taxa;
+    const resultado = valor * cotacoes[origem][destino];
 
     document.getElementById('resultado').innerText =
-        `${valor.toFixed(2)} ${origem} = ${resultado.toFixed(2)} ${destino}`;
+    `${valor.toFixed(2)} ${origem} = ${resultado.toFixed(2)} ${destino}`;
 }
 </script>
 
