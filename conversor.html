@@ -5,120 +5,103 @@
 <title>Conversor de Moedas</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
 <style>
-    body {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-        background: #203a43;
-        color: #fff;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        padding: 20px;
-        text-align: center;
-    }
+body {
+    font-family: Arial;
+    background: linear-gradient(120deg,#0f2027,#203a43,#2c5364);
+    color: white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    text-align:center;
+}
 
-    h1 { color: #00c6ff; margin-bottom: 20px; }
+.box {
+    background: rgba(255,255,255,0.05);
+    padding: 30px;
+    border-radius:20px;
+    width:90%;
+    max-width:400px;
+}
 
-    input, select {
-        padding: 12px;
-        margin: 10px;
-        border-radius: 12px;
-        border: none;
-        width: 220px;
-        font-size: 16px;
-    }
+input, select {
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border-radius:10px;
+    border:none;
+}
 
-    button {
-        padding: 12px 20px;
-        border-radius: 12px;
-        border: none;
-        background: #00c6ff;
-        color: #111;
-        font-size: 16px;
-        cursor: pointer;
-        margin-top: 10px;
-        transition: 0.3s;
-    }
+button {
+    padding:10px;
+    width:100%;
+    border:none;
+    border-radius:10px;
+    background:#00c6ff;
+    font-weight:bold;
+    cursor:pointer;
+}
 
-    button:hover {
-        background: #00a2cc;
-        transform: translateY(-2px);
-    }
+h2 { color:#00c6ff; }
 
-    #resultado {
-        margin-top: 20px;
-        font-size: 18px;
-    }
-
-    .voltar {
-        margin-top: 30px;
-        background: rgba(255,255,255,0.1);
-        color: #fff;
-    }
-
-    .voltar:hover {
-        background: rgba(255,255,255,0.2);
-    }
 </style>
 </head>
+
 <body>
 
-<h1>💱 Conversor de Moedas</h1>
+<div class="box">
+    <h2>💱 Conversor de Moedas</h2>
 
-<input type="number" id="valor" placeholder="Digite o valor">
+    <input type="number" id="valor" placeholder="Digite o valor">
 
-<select id="origem">
-    <option value="BRL">Real (BRL)</option>
-    <option value="USD">Dólar (USD)</option>
-    <option value="EUR">Euro (EUR)</option>
-</select>
+    <select id="de"></select>
+    <select id="para"></select>
 
-<select id="destino">
-    <option value="USD">Dólar (USD)</option>
-    <option value="BRL">Real (BRL)</option>
-    <option value="EUR">Euro (EUR)</option>
-</select>
+    <button onclick="converter()">Converter</button>
 
-<br>
-<button onclick="converter()">Converter</button>
+    <h3 id="resultado"></h3>
 
-<div id="resultado"></div>
-
-<button class="voltar" onclick="window.location.href='../projetos.html'">
-⬅ Voltar
-</button>
+    <br>
+    <a href="projetos.html" style="color:#00c6ff;">← Voltar</a>
+</div>
 
 <script>
-const cotacoes = {
-    BRL: { USD: 0.20, EUR: 0.19 },
-    USD: { BRL: 5.05, EUR: 0.95 },
-    EUR: { BRL: 5.30, USD: 1.05 }
-};
+const url = "https://api.exchangerate-api.com/v4/latest/USD";
 
-function converter() {
-    const valor = parseFloat(document.getElementById('valor').value);
-    const origem = document.getElementById('origem').value;
-    const destino = document.getElementById('destino').value;
+let moedas = [];
 
-    if (isNaN(valor)) {
-        alert("Digite um valor válido!");
-        return;
-    }
+fetch(url)
+.then(res => res.json())
+.then(data => {
+    moedas = Object.keys(data.rates);
 
-    if (origem === destino) {
-        document.getElementById('resultado').innerText =
-        `${valor.toFixed(2)} ${destino}`;
-        return;
-    }
+    let selectDe = document.getElementById("de");
+    let selectPara = document.getElementById("para");
 
-    const resultado = valor * cotacoes[origem][destino];
+    moedas.forEach(moeda => {
+        selectDe.innerHTML += `<option>${moeda}</option>`;
+        selectPara.innerHTML += `<option>${moeda}</option>`;
+    });
 
-    document.getElementById('resultado').innerText =
-    `${valor.toFixed(2)} ${origem} = ${resultado.toFixed(2)} ${destino}`;
+    selectDe.value = "USD";
+    selectPara.value = "BRL";
+});
+
+function converter(){
+    let valor = document.getElementById("valor").value;
+    let de = document.getElementById("de").value;
+    let para = document.getElementById("para").value;
+
+    fetch(`https://api.exchangerate-api.com/v4/latest/${de}`)
+    .then(res => res.json())
+    .then(data => {
+        let taxa = data.rates[para];
+        let resultado = valor * taxa;
+
+        document.getElementById("resultado").innerText =
+            `${valor} ${de} = ${resultado.toFixed(2)} ${para}`;
+    });
 }
 </script>
 
