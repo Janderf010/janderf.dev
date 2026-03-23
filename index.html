@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <title>Janderf.dev</title>
     <link rel="icon" href="favicon.png">
-    <!-- Essencial para responsividade -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
-        /* ===== RESET E FONTES ===== */
         * { margin:0; padding:0; box-sizing:border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial;
@@ -26,21 +24,18 @@
             100% {background-position:0% 50%;}
         }
 
-        /* ===== CONTAINER ===== */
         .container {
             padding: 80px 20px;
             max-width: 1200px;
             margin: auto;
         }
 
-        /* ===== LOGO ===== */
         .logo {
             width: 100px;
             margin-bottom: 30px;
             animation: fadeIn 1.5s forwards;
         }
 
-        /* ===== TÍTULO ===== */
         h1 {
             font-size: clamp(24px, 5vw, 50px);
             margin-bottom: 20px;
@@ -60,7 +55,6 @@
             animation-delay: 1s;
         }
 
-        /* ===== TIMELINE ===== */
         .timeline {
             display: flex;
             justify-content: space-around;
@@ -108,7 +102,6 @@
             margin: 0 auto;
         }
 
-        /* ===== CARDS ESTILO APPLE ===== */
         a { text-decoration: none; color: inherit; }
         .card {
             background: rgba(255,255,255,0.05);
@@ -124,7 +117,7 @@
             transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
         }
         .card:hover {
-            transform: scale(1.05);
+            transform: scale(1.05) rotateZ(-1deg);
             box-shadow: 0 15px 35px rgba(0,198,255,0.6);
             background: rgba(255,255,255,0.1);
         }
@@ -135,13 +128,17 @@
             color: #00c6ff;
             margin-bottom: 10px;
         }
+        .card h4 { /* NOVO: subtítulo abaixo do título */
+            color: #ccc;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
         .card p {
             color: #ccc;
             font-size: 16px;
             line-height: 1.4;
         }
 
-        /* ===== BOTÃO ===== */
         .btn {
             margin-top: 30px;
             padding: 12px 30px;
@@ -159,12 +156,10 @@
             box-shadow: 0 10px 20px rgba(0,198,255,0.4);
         }
 
-        /* ===== ANIMAÇÕES ===== */
         @keyframes fadeIn { to { opacity: 1; } }
         @keyframes bounce { from { transform: translateY(0px); } to { transform: translateY(-15px); } }
         @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
 
-        /* ===== RESPONSIVIDADE ===== */
         @media (max-width: 600px) {
             .container { padding: 50px 10px; }
             .timeline { flex-direction: column; align-items: center; }
@@ -175,14 +170,11 @@
 </head>
 <body>
     <div class="container">
-
-        <!-- TÍTULO E DESCRIÇÃO -->
         <h1>Início</h1>
         <p class="description">
             Guia completo para se tornar um dos melhores programadores de TI, explorar novas culturas e conquistar experiências incríveis pelo mundo.
         </p>
 
-        <!-- TIMELINE DIVERTIDA -->
         <div class="timeline">
             <div>
                 <div class="point">🏁</div>
@@ -210,6 +202,7 @@
         <a href="projetos.html">
             <div class="card">
                 <h3>Projetos</h3>
+                <h4>Novos projetos aparecerão aqui!</h4> <!-- NOVO -->
                 <p>Mostra os sites, apps ou jogos que criei. Cada projeto com título, descrição e link para ver funcionando.</p>
             </div>
         </a>
