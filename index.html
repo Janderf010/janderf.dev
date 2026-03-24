@@ -10,18 +10,19 @@
 
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior: smooth; }
 
 body {
     font-family: 'Poppins', sans-serif;
     transition: 0.4s;
 }
 
+/* MODOS */
 body.dark {
     background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
     color: #fff;
 }
 
+/* BOTÃO */
 .toggle {
     position: fixed;
     top: 20px;
@@ -49,6 +50,7 @@ body.dark .circle {
     background: #111;
 }
 
+/* CONTAINER */
 .container {
     padding: 100px 20px;
     text-align: center;
@@ -91,7 +93,6 @@ h1 {
     align-items: center;
     font-size: 26px;
     animation: float 2s infinite alternate;
-    cursor: pointer;
 }
 
 .point:hover {
@@ -118,14 +119,25 @@ h1 {
     transition: 0.3s;
 }
 
-.card:hover {
-    transform: scale(1.08);
-}
-
+/* PROJETOS */
 .projetos:hover {
+    transform: scale(1.08);
     box-shadow: 0 15px 35px rgba(40,40,40,0.9);
 }
 
+/* AZUL */
+.azul:hover {
+    transform: scale(1.08);
+    box-shadow: 0 15px 35px rgba(0,198,255,0.8);
+}
+
+/* DOURADO */
+.versiculo:hover {
+    transform: scale(1.08);
+    box-shadow: 0 15px 35px rgba(255,215,0,0.6);
+}
+
+/* EXTRA */
 .extra {
     margin-top: 100px;
 }
@@ -158,40 +170,13 @@ a { text-decoration: none; color: inherit; }
 <div class="timeline">
 <div class="points">
 
-<div>
-<div class="point">🏁</div>
-<div class="point-text">Largada</div>
-</div>
-
-<div>
-<div class="point">🎯</div>
-<div class="point-text">Objetivo</div>
-</div>
-
-<div>
-<div class="point">📊</div>
-<div class="point-text">Planejar</div>
-</div>
-
-<div>
-<div class="point">📚</div>
-<div class="point-text">Estudar</div>
-</div>
-
-<div>
-<div class="point">💻</div>
-<div class="point-text">Programar</div>
-</div>
-
-<div>
-<div class="point">📈</div>
-<div class="point-text">Progredir</div>
-</div>
-
-<div>
-<div class="point">🏆</div>
-<div class="point-text">Sucesso</div>
-</div>
+<div><div class="point">🏁</div><div class="point-text">Largada</div></div>
+<div><div class="point">🎯</div><div class="point-text">Objetivo</div></div>
+<div><div class="point">📊</div><div class="point-text">Planejar</div></div>
+<div><div class="point">📚</div><div class="point-text">Estudar</div></div>
+<div><div class="point">💻</div><div class="point-text">Programar</div></div>
+<div><div class="point">📈</div><div class="point-text">Progredir</div></div>
+<div><div class="point">🏆</div><div class="point-text">Sucesso</div></div>
 
 </div>
 </div>
@@ -204,21 +189,21 @@ a { text-decoration: none; color: inherit; }
 </a>
 
 <a href="skills.html">
-<div class="card">
+<div class="card azul">
 <h3>Skills 💻</h3>
 <p>Minhas habilidades</p>
 </div>
 </a>
 
 <a href="educativo.html">
-<div class="card">
+<div class="card azul">
 <h3>Conteúdo 📚</h3>
 <p>Dicas e tutoriais</p>
 </div>
 </a>
 
 <a href="jesus.html">
-<div class="card">
+<div class="card versiculo">
 <h3>Versículos ✨</h3>
 <p>Minha base e motivação</p>
 </div>
