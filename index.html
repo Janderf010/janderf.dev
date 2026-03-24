@@ -21,12 +21,7 @@ body.dark {
     background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
     color: #fff;
 }
-body.light {
-    background: linear-gradient(120deg, #ffffff, #e6f0ff);
-    color: #111;
-}
 
-/* BOTÃO */
 .toggle {
     position: fixed;
     top: 20px;
@@ -37,6 +32,7 @@ body.light {
     border-radius: 50px;
     cursor: pointer;
 }
+
 .circle {
     width: 30px;
     height: 30px;
@@ -47,6 +43,7 @@ body.light {
     left: 3px;
     transition: 0.3s;
 }
+
 body.dark .circle {
     left: 37px;
     background: #111;
@@ -61,21 +58,6 @@ h1 {
     font-size: 50px;
 }
 
-/* PROGRESSO */
-.progress-container {
-    width: 90%;
-    max-width: 800px;
-    height: 10px;
-    background: rgba(255,255,255,0.1);
-    margin: 20px auto;
-    border-radius: 10px;
-}
-.progress-bar {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, #00c6ff, #0072ff);
-}
-
 /* TIMELINE */
 .timeline {
     position: relative;
@@ -83,6 +65,7 @@ h1 {
     width: 90%;
     max-width: 1000px;
 }
+
 .timeline::before {
     content: '';
     position: absolute;
@@ -93,11 +76,11 @@ h1 {
     background: linear-gradient(90deg, #00c6ff, #0072ff);
 }
 
-/* PONTOS */
 .points {
     display: flex;
     justify-content: space-between;
 }
+
 .point {
     width: 60px;
     height: 60px;
@@ -108,17 +91,17 @@ h1 {
     align-items: center;
     font-size: 26px;
     animation: float 2s infinite alternate;
-    transition: 0.3s;
     cursor: pointer;
 }
+
 .point:hover {
     transform: scale(1.3);
-    background: rgba(0,198,255,0.4);
 }
+
 .point-text {
     margin-top: 10px;
-    font-size: 14px;
 }
+
 @keyframes float {
     from { transform: translateY(0); }
     to { transform: translateY(-12px); }
@@ -130,53 +113,31 @@ h1 {
     backdrop-filter: blur(15px);
     padding: 25px;
     margin: 30px auto;
-    width: 90%;
     max-width: 350px;
     border-radius: 20px;
     transition: 0.3s;
 }
+
 .card:hover {
     transform: scale(1.08);
-    box-shadow: 0 15px 35px rgba(0,198,255,0.6);
 }
+
 .projetos:hover {
     box-shadow: 0 15px 35px rgba(40,40,40,0.9);
 }
-.versiculos:hover {
-    box-shadow: 0 15px 35px rgba(255,215,0,0.6);
-}
 
-/* EXTRA */
 .extra {
     margin-top: 100px;
 }
+
 .extra h2 {
     font-size: 30px;
 }
+
 .extra p {
     max-width: 600px;
     margin: auto;
     line-height: 1.6;
-    opacity: 0.8;
-}
-
-/* VERSÍCULOS */
-.versiculo {
-    margin-top: 100px;
-}
-.verso {
-    background: rgba(255,255,255,0.08);
-    padding: 25px;
-    margin: 20px auto;
-    max-width: 700px;
-    border-radius: 20px;
-    transition: 0.3s;
-}
-.verso:hover {
-    transform: scale(1.03);
-}
-.verso span {
-    color: #00c6ff;
 }
 
 a { text-decoration: none; color: inherit; }
@@ -194,45 +155,41 @@ a { text-decoration: none; color: inherit; }
 
 <h1>Início</h1>
 
-<div class="progress-container">
-    <div class="progress-bar" id="progressBar"></div>
-</div>
-
 <div class="timeline">
 <div class="points">
 
 <div>
-<div class="point" onclick="marcarEtapa(0)">🏁</div>
+<div class="point">🏁</div>
 <div class="point-text">Largada</div>
 </div>
 
 <div>
-<div class="point" onclick="marcarEtapa(1)">🎯</div>
+<div class="point">🎯</div>
 <div class="point-text">Objetivo</div>
 </div>
 
 <div>
-<div class="point" onclick="marcarEtapa(2)">📊</div>
+<div class="point">📊</div>
 <div class="point-text">Planejar</div>
 </div>
 
 <div>
-<div class="point" onclick="marcarEtapa(3)">📚</div>
+<div class="point">📚</div>
 <div class="point-text">Estudar</div>
 </div>
 
 <div>
-<div class="point" onclick="marcarEtapa(4)">💻</div>
+<div class="point">💻</div>
 <div class="point-text">Programar</div>
 </div>
 
 <div>
-<div class="point" onclick="marcarEtapa(5)">📈</div>
+<div class="point">📈</div>
 <div class="point-text">Progredir</div>
 </div>
 
 <div>
-<div class="point" onclick="marcarEtapa(6)">🏆</div>
+<div class="point">🏆</div>
 <div class="point-text">Sucesso</div>
 </div>
 
@@ -260,8 +217,8 @@ a { text-decoration: none; color: inherit; }
 </div>
 </a>
 
-<a href="#versiculos">
-<div class="card versiculos">
+<a href="jesus.html">
+<div class="card">
 <h3>Versículos ✨</h3>
 <p>Minha base e motivação</p>
 </div>
@@ -270,58 +227,16 @@ a { text-decoration: none; color: inherit; }
 <div class="extra">
 <h2>Por que programação?</h2>
 <p>
-Programação é transformar ideias em algo real através de testes, errando ou acertando...
+Programação é transformar ideias em algo real através de testes, errando ou acertando, é aprender como tudo funciona. Tudo isso vai muito além de códigos bonitos, envolve lógica, criatividade e persistência. No fim, é ter o poder de criar soluções e fazer valer o que antes era só um simples rascunho, é dar vida a algo que antes era só um pensamento, é trabalhar e vencer!
 </p>
 </div>
-
-<section id="versiculos" class="versiculo">
-<h2>Propósito & Fé ✨</h2>
-
-<div class="verso">
-<p>Porque sou eu que conheço os planos que tenho para vocês...</p>
-<span>Jeremias 29:11</span>
-</div>
-
-<div class="verso">
-<p>Não tema, pois eu estou com você...</p>
-<span>Isaías 41:10</span>
-</div>
-
-</section>
 
 </div>
 
 <script>
-
-let progresso = localStorage.getItem("progresso") || -1;
-
-function marcarEtapa(etapa) {
-    progresso = etapa;
-    localStorage.setItem("progresso", progresso);
-    atualizarUI();
-}
-
-function atualizarUI() {
-    const pontos = document.querySelectorAll(".point");
-    pontos.forEach((p, i) => {
-        if (i <= progresso) {
-            p.style.background = "#00c6ff";
-        } else {
-            p.style.background = "rgba(0,198,255,0.2)";
-        }
-    });
-
-    const porcentagem = ((progresso + 1) / 7) * 100;
-    document.getElementById("progressBar").style.width = porcentagem + "%";
-}
-
 function toggleMode() {
     document.body.classList.toggle("dark");
-    document.body.classList.toggle("light");
 }
-
-window.onload = atualizarUI;
-
 </script>
 
 </body>
