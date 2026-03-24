@@ -252,12 +252,46 @@ Programação é transformar ideias em algo real através de testes, errando ou 
 </div>
 
 <script>
+
+let progresso = localStorage.getItem("progresso") || -1;
+
+function marcarEtapa(etapa) {
+    progresso = etapa;
+    localStorage.setItem("progresso", progresso);
+    atualizarUI();
+}
+
+function atualizarUI() {
+    const pontos = document.querySelectorAll(".point");
+    pontos.forEach((p, i) => {
+        if (i <= progresso) {
+            p.style.background = "#00c6ff";
+        } else {
+            p.style.background = "rgba(0,198,255,0.2)";
+        }
+    });
+
+    const porcentagem = ((progresso + 1) / 7) * 100;
+    document.getElementById("progressBar").style.width = porcentagem + "%";
+}
+
 function toggleMode() {
     document.body.classList.toggle("dark");
     document.body.classList.toggle("light");
 }
-</script>
 
-</body>
-</html>
-<print> God is good</print>
+function revealOnScroll() {
+    const elements = document.querySelectorAll('.reveal');
+    elements.forEach(el => {
+        const windowHeight = window.innerHeight;
+        const elementTop = el.getBoundingClientRect().top;
+        if (elementTop < windowHeight - 50) {
+            el.classList.add('active');
+        }
+    });
+}
+
+window.addEventListener('scroll', revealOnScroll);
+window.onload = atualizarUI;
+
+</script>
