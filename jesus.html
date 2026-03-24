@@ -11,7 +11,7 @@
 <style>
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+    background: linear-gradient(120deg, #1a1a1a, #000);
     color: #fff;
     text-align: center;
 }
@@ -22,27 +22,44 @@ body {
 
 h1 {
     font-size: 40px;
+    color: gold;
+}
+
+.main-card {
+    background: rgba(255,215,0,0.1);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(255,215,0,0.4);
 }
 
 .card {
-    background: rgba(255,255,255,0.08);
+    background: rgba(255,215,0,0.08);
     padding: 25px;
     margin: 20px auto;
     max-width: 700px;
     border-radius: 20px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(255,215,0,0.7);
 }
 
 .card span {
-    color: #00c6ff;
+    display: block;
+    margin-top: 10px;
+    color: gold;
+    font-weight: bold;
 }
 
 .btn {
     display: inline-block;
     margin-top: 30px;
-    padding: 10px 20px;
-    background: #00c6ff;
+    padding: 12px 25px;
+    background: gold;
     color: #111;
-    border-radius: 10px;
+    border-radius: 12px;
     text-decoration: none;
 }
 
@@ -55,14 +72,22 @@ h1 {
 
 <h1>Propósito & Fé ✨</h1>
 
+<div class="main-card">
+
 <div class="card">
-<p>Porque sou eu que conheço os planos que tenho para vocês...</p>
+<p>
+Porque sou eu que conheço os planos que tenho para vocês, planos de fazê-los prosperar e não de causar dano, planos de dar a vocês esperança e um futuro.
+</p>
 <span>Jeremias 29:11</span>
 </div>
 
 <div class="card">
-<p>Não tema, pois eu estou com você...</p>
+<p>
+Não tema, pois eu estou com você; não tenha medo, pois eu sou o seu Deus. Eu o fortalecerei e o ajudarei; eu o segurarei com a minha mão direita vitoriosa.
+</p>
 <span>Isaías 41:10</span>
+</div>
+
 </div>
 
 <a href="index.html" class="btn">⬅ Voltar</a>
