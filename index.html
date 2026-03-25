@@ -284,3 +284,39 @@ Guia completo para se tornar um dos melhores programadores do mundo, aprender no
 
 <div class="fade" style="margin-top:100px;">
 <h2>
+
+<script>
+
+// FORÇA COMEÇAR NO DARK
+let modo = localStorage.getItem("modo");
+
+if (modo === "light") {
+    document.body.className = "light";
+} else {
+    document.body.className = "dark";
+}
+
+// BOTÃO
+function toggleMode() {
+    if (document.body.className === "dark") {
+        document.body.className = "light";
+        localStorage.setItem("modo", "light");
+    } else {
+        document.body.className = "dark";
+        localStorage.setItem("modo", "dark");
+    }
+}
+
+// ANIMAÇÃO SCROLL
+const faders = document.querySelectorAll('.fade');
+
+window.addEventListener('scroll', () => {
+    faders.forEach(el => {
+        const top = el.getBoundingClientRect().top;
+        if (top < window.innerHeight - 100) {
+            el.classList.add('show');
+        }
+    });
+});
+
+</script>
