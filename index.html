@@ -9,24 +9,26 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-/* TRANSIÇÃO GLOBAL */
+* { margin:0; padding:0; box-sizing:border-box; }
+
 body {
-    transition: background 0.4s, color 0.4s;
+    font-family: 'Poppins', sans-serif;
+    transition: 0.5s;
+    overflow-x: hidden;
 }
 
-/* MODO ESCURO */
+/* MODOS */
 body.dark {
     background: linear-gradient(180deg, #000000, #0a0a0a, #111);
     color: #fff;
 }
 
-/* MODO CLARO */
 body.light {
     background: linear-gradient(180deg, #e0e0e0, #cfcfcf, #bdbdbd);
     color: #111;
 }
 
-/* BOTÃO TOGGLE */
+/* BOTÃO */
 .toggle {
     position: fixed;
     top: 20px;
@@ -36,6 +38,7 @@ body.light {
     background: #888;
     border-radius: 50px;
     cursor: pointer;
+    z-index: 999;
 }
 
 .circle {
@@ -53,46 +56,6 @@ body.dark .circle {
     left: 36px;
     background: #000;
 }
-* { margin:0; padding:0; box-sizing:border-box; }
-
-body {
-    font-family: 'Poppins', sans-serif;
-    transition: 0.4s;
-}
-
-/* MODOS */
-body.dark {
-    background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
-    color: #fff;
-}
-
-/* BOTÃO */
-.toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 70px;
-    height: 35px;
-    background: #ccc;
-    border-radius: 50px;
-    cursor: pointer;
-}
-
-.circle {
-    width: 30px;
-    height: 30px;
-    background: white;
-    border-radius: 50%;
-    position: absolute;
-    top: 2.5px;
-    left: 3px;
-    transition: 0.3s;
-}
-
-body.dark .circle {
-    left: 37px;
-    background: #111;
-}
 
 /* CONTAINER */
 .container {
@@ -100,8 +63,16 @@ body.dark .circle {
     text-align: center;
 }
 
-h1 {
-    font-size: 50px;
+/* ANIMAÇÃO */
+.fade {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 1s;
+}
+
+.fade.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* TIMELINE */
@@ -115,7 +86,7 @@ h1 {
 .timeline::before {
     content: '';
     position: absolute;
-    top: 50%;
+    top: 35px;
     left: 5%;
     width: 90%;
     height: 4px;
@@ -125,6 +96,14 @@ h1 {
 .points {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 14%;
 }
 
 .point {
@@ -137,14 +116,17 @@ h1 {
     align-items: center;
     font-size: 26px;
     animation: float 2s infinite alternate;
+    transition: 0.3s;
 }
 
 .point:hover {
-    transform: scale(1.3);
+    transform: scale(1.2);
 }
 
 .point-text {
     margin-top: 10px;
+    font-size: 13px;
+    opacity: 0.8;
 }
 
 @keyframes float {
@@ -154,104 +136,69 @@ h1 {
 
 /* CARDS */
 .card {
-    background: rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.08);
     backdrop-filter: blur(15px);
     padding: 25px;
     margin: 30px auto;
     max-width: 350px;
     border-radius: 20px;
-    transition: 0.3s;
+    transition: 0.4s;
 }
 
-/* PROJETOS */
-.projetos:hover {
-    transform: scale(1.08);
-    box-shadow: 0 15px 35px rgba(40,40,40,0.9);
+.card:hover {
+    transform: scale(1.05);
 }
 
-/* AZUL */
 .azul:hover {
-    transform: scale(1.08);
     box-shadow: 0 15px 35px rgba(0,198,255,0.8);
 }
 
-/* DOURADO */
-.versiculo:hover {
-    transform: scale(1.08);
-    box-shadow: 0 15px 35px rgba(255,215,0,0.6);
+/* CTA */
+.cta {
+    margin-top: 60px;
 }
 
-/* EXTRA */
-.extra {
-    margin-top: 100px;
+.cta button {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(90deg, #00c6ff, #0072ff);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-.extra h2 {
-    font-size: 30px;
+.cta button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 30px rgba(0,198,255,0.8);
 }
 
-.extra p {
-    max-width: 600px;
-    margin: auto;
-    line-height: 1.6;
+/* FOOTER */
+footer {
+    text-align:center;
+    padding:25px;
+    font-size:13px;
+    opacity:0.6;
 }
 
-a { text-decoration: none; color: inherit; }
-
-/* 📱 RESPONSIVO CELULAR (SEM BAGUNÇAR) */
+/* MOBILE */
 @media (max-width: 600px) {
 
-    h1 {
-        font-size: 32px;
-    }
-
-    .container {
-        padding: 80px 15px;
-    }
-
-    .container p {
-        font-size: 14px;
-    }
-
     .timeline {
-        width: 100%;
         overflow-x: auto;
     }
 
     .points {
-        gap: 15px;
-        padding: 10px;
         min-width: 600px;
-    }
-
-    .point {
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
-    }
-
-    .point-text {
-        font-size: 12px;
-    }
-
-    .card {
-        width: 100%;
-        max-width: 100%;
-        margin: 20px auto;
-    }
-
-    .extra h2 {
-        font-size: 22px;
-    }
-
-    .extra p {
-        font-size: 14px;
-        padding: 0 5px;
+        gap: 15px;
     }
 
 }
 </style>
 </head>
+
+<body>
 
 <div class="toggle" onclick="toggleMode()">
     <div class="circle"></div>
@@ -259,91 +206,81 @@ a { text-decoration: none; color: inherit; }
 
 <div class="container">
 
-<h1>Início</h1>
-<p>Guia completo para se tornar um dos melhores programadores do mundo, aprender novas culturas e viver grandes experiências pelo mundo</p>
+<h1 class="fade">Início</h1>
 
-<div class="timeline">
+<p class="fade">
+Guia completo para se tornar um dos melhores programadores do mundo, aprender novas culturas e viver grandes experiências pelo mundo
+</p>
+
+<!-- TIMELINE -->
+<div class="timeline fade">
 <div class="points">
 
-<div><div class="point">🏁</div><div class="point-text">Largada</div></div>
-<div><div class="point">🎯</div><div class="point-text">Objetivo</div></div>
-<div><div class="point">📊</div><div class="point-text">Planejar</div></div>
-<div><div class="point">📚</div><div class="point-text">Estudar</div></div>
-<div><div class="point">💻</div><div class="point-text">Programar</div></div>
-<div><div class="point">📈</div><div class="point-text">Progredir</div></div>
-<div><div class="point">🏆</div><div class="point-text">Sucesso</div></div>
+<div class="item">
+<div class="point">🏁</div>
+<div class="point-text">Largada</div>
+</div>
+
+<div class="item">
+<div class="point">🎯</div>
+<div class="point-text">Objetivo</div>
+</div>
+
+<div class="item">
+<div class="point">📊</div>
+<div class="point-text">Planejar</div>
+</div>
+
+<div class="item">
+<div class="point">📚</div>
+<div class="point-text">Estudar</div>
+</div>
+
+<div class="item">
+<div class="point">💻</div>
+<div class="point-text">Programar</div>
+</div>
+
+<div class="item">
+<div class="point">📈</div>
+<div class="point-text">Progredir</div>
+</div>
+
+<div class="item">
+<div class="point">🏆</div>
+<div class="point-text">Sucesso</div>
+</div>
 
 </div>
 </div>
 
 <a href="projetos.html">
-<div class="card azul">
+<div class="card azul fade">
 <h3>Projetos 🚀</h3>
 <p>Meus sites e ideias</p>
 </div>
 </a>
 
 <a href="skills.html">
-<div class="card azul">
+<div class="card azul fade">
 <h3>Skills 💻</h3>
 <p>Minhas habilidades</p>
 </div>
 </a>
 
 <a href="educativo.html">
-<div class="card azul">
+<div class="card azul fade">
 <h3>Conteúdo 📚</h3>
 <p>Dicas e tutoriais</p>
 </div>
 </a>
 
 <a href="jesus.html">
-<div class="card azul">
+<div class="card azul fade">
 <h3>Fé e propósito ✝️</h3>
 <p>Minha base e motivação</p>
 </div>
 </a>
 
-<div class="extra">
-<h2>Por que programação?</h2>
-<p>
-Programação é transformar ideias em algo real através de testes, errando ou acertando, é aprender como tudo funciona. Tudo isso vai muito além de códigos bonitos, envolve lógica, criatividade e persistência. No fim, é ter o poder de criar soluções e fazer valer o que antes era só um simples rascunho, é dar vida a algo que antes era só um pensamento, é trabalhar e vencer!
-</p>
-</div>
-
-</div>
-
-<script>
-function toggleMode() {
-    document.body.classList.toggle("dark");
-}
-</script>
-<print>God is good!</print>
-
-<script>
-
-// CARREGAR MODO SALVO
-let modo = localStorage.getItem("modo");
-
-if (modo === "light") {
-    document.body.classList.add("light");
-} else {
-    document.body.classList.add("dark");
-}
-
-// TROCAR MODO
-function toggleMode() {
-    document.body.classList.toggle("dark");
-    document.body.classList.toggle("light");
-
-    if (document.body.classList.contains("light")) {
-        localStorage.setItem("modo", "light");
-    } else {
-        localStorage.setItem("modo", "dark");
-    }
-}
-
-</script>
-
-</body>
-</html>
+<div class="fade" style="margin-top:100px;">
+<h2>
