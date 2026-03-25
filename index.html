@@ -176,10 +176,10 @@ footer{padding:30px;text-align:center;opacity:.6}
 <h2>Explorar</h2>
 
 <div class="grid">
-<div class="card explorar" onclick="showInfo('projetos')">Projetos 🚀</div>
-<div class="card explorar" onclick="showInfo('skills')">Skills 💻</div>
-<div class="card explorar" onclick="showInfo('conteudo')">Conteúdo 📚</div>
-<div class="card explorar" onclick="showInfo('fe')">Fé ✝️</div>
+<div class="card dark azul" onclick="showInfo('projetos')">Projetos 🚀</div>
+<div class="card dark azul" onclick="showInfo('skills')">Skills 💻</div>
+<div class="card dark azul" onclick="showInfo('conteudo')">Conteúdo 📚</div>
+<div class="card dark azul" onclick="showInfo('fe')">Fé ✝️</div>
 </div>
 
 <div id="info" class="content-box"></div>
@@ -188,12 +188,12 @@ footer{padding:30px;text-align:center;opacity:.6}
 
 <!-- SKILLS -->
 <div class="section">
-<h2>Skills</h2>
+<h2>Skills & habilidades</h2>
 
 <div class="grid">
-<div class="card skills" onclick="showSkill('html')">HTML</div>
-<div class="card skills" onclick="showSkill('css')">CSS</div>
-<div class="card skills" onclick="showSkill('js')">JS</div>
+<div class="card dark verde" onclick="showSkill('html')">HTML</div>
+<div class="card dark verde" onclick="showSkill('css')">CSS</div>
+<div class="card dark verde" onclick="showSkill('js')">JS</div>
 </div>
 
 <div id="skillBox" class="content-box"></div>
@@ -227,7 +227,7 @@ Copyright © 2026 Janderf.dev. Todos os direitos reservados
 
 <script>
 
-// DARK MODE
+// Iniciar em DARK MODE
 let modo=localStorage.getItem("modo");
 document.body.className=modo==="light"?"light":"dark";
 function toggleMode(){
