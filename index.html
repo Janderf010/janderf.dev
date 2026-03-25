@@ -8,209 +8,216 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
+*{margin:0;padding:0;box-sizing:border-box}
 
-body {
-    font-family: 'Poppins', sans-serif;
-    transition: 0.5s;
+body{
+font-family:'Poppins',sans-serif;
+transition:.5s;
 }
 
 /* MODOS */
-body.dark {
-    background: linear-gradient(180deg, #000, #0a0a0a, #111);
-    color: white;
+body.dark{
+background:linear-gradient(180deg,#000,#0a0a0a,#111);
+color:#fff;
+}
+body.light{
+background:linear-gradient(180deg,#e0e0e0,#cfcfcf,#bdbdbd);
+color:#111;
 }
 
-body.light {
-    background: linear-gradient(180deg, #e0e0e0, #cfcfcf, #bdbdbd);
-    color: black;
+/* TITULOS */
+h1,h2{
+font-size:clamp(32px,6vw,60px);
+margin-bottom:20px;
 }
 
-/* BOTÃO */
-.toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 65px;
-    height: 30px;
-    background: #888;
-    border-radius: 50px;
-    cursor: pointer;
+/* TOGGLE */
+.toggle{
+position:fixed;top:20px;right:20px;
+width:65px;height:30px;background:#888;border-radius:50px;cursor:pointer;
 }
+.circle{
+width:26px;height:26px;background:#fff;border-radius:50%;
+position:absolute;top:2px;left:3px;transition:.3s;
+}
+body.dark .circle{left:36px;background:#000}
 
-.circle {
-    width: 26px;
-    height: 26px;
-    background: white;
-    border-radius: 50%;
-    position: absolute;
-    top: 2px;
-    left: 3px;
-    transition: 0.3s;
-}
-
-body.dark .circle {
-    left: 36px;
-    background: black;
-}
-
-/* CONTAINER */
-.section {
-    padding: 100px 20px;
-    text-align: center;
-}
-
-/* ANIMAÇÃO */
-.fade {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: 1s;
-}
-.fade.show {
-    opacity: 1;
-    transform: translateY(0);
-}
+/* SECTION */
+.section{padding:100px 20px;text-align:center}
 
 /* TIMELINE */
-.timeline {
-    margin: 60px auto;
-    max-width: 1000px;
+.timeline{margin:60px auto;max-width:1000px;position:relative}
+.timeline::before{
+content:"";
+position:absolute;
+top:30px;
+left:5%;
+width:90%;
+height:4px;
+background:linear-gradient(90deg,#00c6ff,#0072ff);
 }
-.points {
-    display: flex;
-    justify-content: space-between;
+.points{display:flex;justify-content:space-between}
+.point{
+width:60px;height:60px;border-radius:50%;
+background:rgba(0,198,255,.2);
+display:flex;align-items:center;justify-content:center;
+animation:float 2s infinite alternate;
 }
-.item {
-    text-align: center;
-}
-.point {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: rgba(0,198,255,0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: float 2s infinite alternate;
-}
-.point-text { font-size: 13px; }
+.point-text{font-size:13px;margin-top:5px}
 
-@keyframes float {
-    from { transform: translateY(0); }
-    to { transform: translateY(-10px); }
+@keyframes float{
+from{transform:translateY(0)}
+to{transform:translateY(-10px)}
+}
+
+/* CARDS GRID */
+.grid{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:20px;
 }
 
 /* CARDS */
-.cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+.card{
+padding:20px;
+width:250px;
+border-radius:20px;
+cursor:pointer;
+transition:.3s;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(10px);
 }
-.card {
-    padding: 25px;
-    width: 250px;
-    border-radius: 20px;
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(15px);
-    cursor: pointer;
-    transition: 0.3s;
-}
-.card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 30px rgba(0,198,255,0.7);
+.card:hover{transform:scale(1.05)}
+
+/* CORES */
+.explorar:hover{box-shadow:0 0 25px #00c6ff}
+.skills:hover{box-shadow:0 0 25px #00ff88}
+.conv:hover{box-shadow:0 0 25px #000}
+
+/* CONTEUDO DINAMICO */
+.content-box{
+margin-top:30px;
+padding:20px;
+border-radius:20px;
+background:rgba(255,255,255,.05);
+max-width:600px;
+margin-left:auto;
+margin-right:auto;
 }
 
 /* CONVERSOR */
-input, select, button {
-    width: 100%;
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 10px;
-    border: none;
+.conv-box{display:none;margin-top:20px}
+input,select,button{
+width:100%;
+margin-top:10px;
+padding:10px;border-radius:10px;border:none;
 }
-button {
-    background: #00c6ff;
-    color: white;
+button{background:#00c6ff;color:#fff}
+
+/* GRAFICO */
+.grafico{
+display:flex;
+gap:3px;
+height:80px;
+margin-top:10px;
+align-items:flex-end;
+}
+.barra{
+width:6px;
+background:#00c6ff;
+border-radius:5px;
+animation:up 1s ease;
+}
+@keyframes up{
+from{height:0}
+to{height:var(--h)}
 }
 
 /* FOOTER */
-footer {
-    padding: 30px;
-    text-align: center;
-    opacity: 0.6;
-}
+footer{padding:30px;text-align:center;opacity:.6}
 </style>
 </head>
 
 <body>
 
-<div class="toggle" onclick="toggleMode()">
-    <div class="circle"></div>
-</div>
+<div class="toggle" onclick="toggleMode()"><div class="circle"></div></div>
 
-<!-- HERO -->
-<div class="section fade">
+<!-- INICIO -->
+<div class="section">
 <h1>Início</h1>
+
 <p>Guia completo para se tornar programador e viver disso</p>
 
 <div class="timeline">
 <div class="points">
 
-<div class="item"><div class="point">🏁</div><div class="point-text">Largada</div></div>
-<div class="item"><div class="point">🎯</div><div class="point-text">Objetivo</div></div>
-<div class="item"><div class="point">📊</div><div class="point-text">Planejar</div></div>
-<div class="item"><div class="point">📚</div><div class="point-text">Estudar</div></div>
-<div class="item"><div class="point">💻</div><div class="point-text">Programar</div></div>
-<div class="item"><div class="point">📈</div><div class="point-text">Progredir</div></div>
-<div class="item"><div class="point">🏆</div><div class="point-text">Sucesso</div></div>
+<div><div class="point">🏁</div><div class="point-text">Largada</div></div>
+<div><div class="point">🎯</div><div class="point-text">Objetivo</div></div>
+<div><div class="point">📊</div><div class="point-text">Planejar</div></div>
+<div><div class="point">📚</div><div class="point-text">Estudar</div></div>
+<div><div class="point">💻</div><div class="point-text">Programar</div></div>
+<div><div class="point">📈</div><div class="point-text">Progredir</div></div>
+<div><div class="point">🏆</div><div class="point-text">Sucesso</div></div>
 
 </div>
 </div>
+
+<div class="content-box">
+<h2>Por que ser programador?</h2>
+<p>Alta renda, liberdade geográfica, trabalhar pela internet, criar produtos digitais e mudar sua vida completamente.</p>
 </div>
 
-<!-- CARDS -->
-<div class="section fade">
+</div>
+
+<!-- EXPLORAR -->
+<div class="section">
 <h2>Explorar</h2>
-<div class="cards">
 
-<div class="card">Projetos 🚀</div>
-<div class="card">Skills 💻</div>
-<div class="card">Conteúdo 📚</div>
-<div class="card">Fé ✝️</div>
-
+<div class="grid">
+<div class="card explorar" onclick="showInfo('projetos')">Projetos 🚀</div>
+<div class="card explorar" onclick="showInfo('skills')">Skills 💻</div>
+<div class="card explorar" onclick="showInfo('conteudo')">Conteúdo 📚</div>
+<div class="card explorar" onclick="showInfo('fe')">Fé ✝️</div>
 </div>
+
+<div id="info" class="content-box"></div>
+
 </div>
 
 <!-- SKILLS -->
-<div class="section fade">
+<div class="section">
 <h2>Skills</h2>
-<div class="card" onclick="showHTML()">HTML</div>
-<div class="card" onclick="showCSS()">CSS</div>
-<div class="card" onclick="showJS()">JS</div>
-<div id="output"></div>
+
+<div class="grid">
+<div class="card skills" onclick="showSkill('html')">HTML</div>
+<div class="card skills" onclick="showSkill('css')">CSS</div>
+<div class="card skills" onclick="showSkill('js')">JS</div>
+</div>
+
+<div id="skillBox" class="content-box"></div>
+
 </div>
 
 <!-- CONVERSOR -->
-<div class="section fade">
-<h2>Conversor 💱</h2>
+<div class="section">
+<h2>Conversor</h2>
 
-<input type="number" id="valor" placeholder="Valor">
-<select id="de">
-<option value="real">Real</option>
-<option value="dolar">Dólar</option>
-<option value="euro">Euro</option>
-</select>
+<div class="card conv" onclick="toggleConv()">Abrir Conversor</div>
 
-<select id="para">
-<option value="dolar">Dólar</option>
-<option value="real">Real</option>
-<option value="euro">Euro</option>
-</select>
+<div class="conv-box" id="conv">
+
+<input id="valor" placeholder="Valor">
+
+<select id="de"></select>
+<select id="para"></select>
 
 <button onclick="converter()">Converter</button>
 
-<div id="resultado"></div>
+<div id="res"></div>
+<div class="grafico" id="grafico"></div>
+
+</div>
 </div>
 
 <footer>
@@ -220,47 +227,7 @@ Copyright © 2026 Janderf.dev. Todos os direitos reservados
 <script>
 
 // DARK MODE
-let modo = localStorage.getItem("modo");
-document.body.className = modo === "light" ? "light" : "dark";
-
-function toggleMode() {
-    if (document.body.className === "dark") {
-        document.body.className = "light";
-        localStorage.setItem("modo","light");
-    } else {
-        document.body.className = "dark";
-        localStorage.setItem("modo","dark");
-    }
-}
-
-// ANIMAÇÃO
-const faders = document.querySelectorAll('.fade');
-window.addEventListener('scroll', () => {
-    faders.forEach(el => {
-        if (el.getBoundingClientRect().top < window.innerHeight - 100) {
-            el.classList.add('show');
-        }
-    });
-});
-
-// SKILLS
-function showHTML() {
-document.getElementById("output").innerText = "<html>...</html>";
-}
-function showCSS() {
-document.getElementById("output").innerText = "body { color:white; }";
-}
-function showJS() {
-document.getElementById("output").innerText = "console.log('JS')";
-}
-
-// CONVERSOR
-function converter(){
-let v = document.getElementById("valor").value;
-document.getElementById("resultado").innerText = v * 5;
-}
-
-</script>
-
-</body>
-</html>
+let modo=localStorage.getItem("modo");
+document.body.className=modo==="light"?"light":"dark";
+function toggleMode(){
+if(document.body.className
