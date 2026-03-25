@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Janderf.dev</title>
-<link rel="icon" href="favicon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
@@ -14,18 +13,17 @@
 body {
     font-family: 'Poppins', sans-serif;
     transition: 0.5s;
-    overflow-x: hidden;
 }
 
 /* MODOS */
 body.dark {
-    background: linear-gradient(180deg, #000000, #0a0a0a, #111);
-    color: #fff;
+    background: linear-gradient(180deg, #000, #0a0a0a, #111);
+    color: white;
 }
 
 body.light {
     background: linear-gradient(180deg, #e0e0e0, #cfcfcf, #bdbdbd);
-    color: #111;
+    color: black;
 }
 
 /* BOTÃO */
@@ -38,7 +36,6 @@ body.light {
     background: #888;
     border-radius: 50px;
     cursor: pointer;
-    z-index: 999;
 }
 
 .circle {
@@ -54,11 +51,11 @@ body.light {
 
 body.dark .circle {
     left: 36px;
-    background: #000;
+    background: black;
 }
 
 /* CONTAINER */
-.container {
+.section {
     padding: 100px 20px;
     text-align: center;
 }
@@ -69,7 +66,6 @@ body.dark .circle {
     transform: translateY(30px);
     transition: 1s;
 }
-
 .fade.show {
     opacity: 1;
     transform: translateY(0);
@@ -77,123 +73,72 @@ body.dark .circle {
 
 /* TIMELINE */
 .timeline {
-    position: relative;
-    margin: 80px auto;
-    width: 90%;
+    margin: 60px auto;
     max-width: 1000px;
 }
-
-.timeline::before {
-    content: '';
-    position: absolute;
-    top: 35px;
-    left: 5%;
-    width: 90%;
-    height: 4px;
-    background: linear-gradient(90deg, #00c6ff, #0072ff);
-}
-
 .points {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
 }
-
 .item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 14%;
+    text-align: center;
 }
-
 .point {
     width: 60px;
     height: 60px;
     border-radius: 50%;
     background: rgba(0,198,255,0.2);
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-size: 26px;
+    justify-content: center;
     animation: float 2s infinite alternate;
-    transition: 0.3s;
 }
-
-.point:hover {
-    transform: scale(1.2);
-}
-
-.point-text {
-    margin-top: 10px;
-    font-size: 13px;
-    opacity: 0.8;
-}
+.point-text { font-size: 13px; }
 
 @keyframes float {
     from { transform: translateY(0); }
-    to { transform: translateY(-12px); }
+    to { transform: translateY(-10px); }
 }
 
 /* CARDS */
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
 .card {
+    padding: 25px;
+    width: 250px;
+    border-radius: 20px;
     background: rgba(255,255,255,0.08);
     backdrop-filter: blur(15px);
-    padding: 25px;
-    margin: 30px auto;
-    max-width: 350px;
-    border-radius: 20px;
-    transition: 0.4s;
-}
-
-.card:hover {
-    transform: scale(1.05);
-}
-
-.azul:hover {
-    box-shadow: 0 15px 35px rgba(0,198,255,0.8);
-}
-
-/* CTA */
-.cta {
-    margin-top: 60px;
-}
-
-.cta button {
-    padding: 15px 30px;
-    border: none;
-    border-radius: 30px;
-    background: linear-gradient(90deg, #00c6ff, #0072ff);
-    color: white;
-    font-size: 16px;
     cursor: pointer;
     transition: 0.3s;
 }
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(0,198,255,0.7);
+}
 
-.cta button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 10px 30px rgba(0,198,255,0.8);
+/* CONVERSOR */
+input, select, button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+}
+button {
+    background: #00c6ff;
+    color: white;
 }
 
 /* FOOTER */
 footer {
-    text-align:center;
-    padding:25px;
-    font-size:13px;
-    opacity:0.6;
-}
-
-/* MOBILE */
-@media (max-width: 600px) {
-
-    .timeline {
-        overflow-x: auto;
-    }
-
-    .points {
-        min-width: 600px;
-        gap: 15px;
-    }
-
+    padding: 30px;
+    text-align: center;
+    opacity: 0.6;
 }
 </style>
 </head>
@@ -204,119 +149,118 @@ footer {
     <div class="circle"></div>
 </div>
 
-<div class="container">
+<!-- HERO -->
+<div class="section fade">
+<h1>Início</h1>
+<p>Guia completo para se tornar programador e viver disso</p>
 
-<h1 class="fade">Início</h1>
-
-<p class="fade">
-Guia completo para se tornar um dos melhores programadores do mundo, aprender novas culturas e viver grandes experiências pelo mundo
-</p>
-
-<!-- TIMELINE -->
-<div class="timeline fade">
+<div class="timeline">
 <div class="points">
 
-<div class="item">
-<div class="point">🏁</div>
-<div class="point-text">Largada</div>
+<div class="item"><div class="point">🏁</div><div class="point-text">Largada</div></div>
+<div class="item"><div class="point">🎯</div><div class="point-text">Objetivo</div></div>
+<div class="item"><div class="point">📊</div><div class="point-text">Planejar</div></div>
+<div class="item"><div class="point">📚</div><div class="point-text">Estudar</div></div>
+<div class="item"><div class="point">💻</div><div class="point-text">Programar</div></div>
+<div class="item"><div class="point">📈</div><div class="point-text">Progredir</div></div>
+<div class="item"><div class="point">🏆</div><div class="point-text">Sucesso</div></div>
+
+</div>
+</div>
 </div>
 
-<div class="item">
-<div class="point">🎯</div>
-<div class="point-text">Objetivo</div>
-</div>
+<!-- CARDS -->
+<div class="section fade">
+<h2>Explorar</h2>
+<div class="cards">
 
-<div class="item">
-<div class="point">📊</div>
-<div class="point-text">Planejar</div>
-</div>
-
-<div class="item">
-<div class="point">📚</div>
-<div class="point-text">Estudar</div>
-</div>
-
-<div class="item">
-<div class="point">💻</div>
-<div class="point-text">Programar</div>
-</div>
-
-<div class="item">
-<div class="point">📈</div>
-<div class="point-text">Progredir</div>
-</div>
-
-<div class="item">
-<div class="point">🏆</div>
-<div class="point-text">Sucesso</div>
-</div>
+<div class="card">Projetos 🚀</div>
+<div class="card">Skills 💻</div>
+<div class="card">Conteúdo 📚</div>
+<div class="card">Fé ✝️</div>
 
 </div>
 </div>
 
-<a href="projetos.html">
-<div class="card azul">
-<h3>Projetos 🚀</h3>
-<p>Meus sites e ideias</p>
+<!-- SKILLS -->
+<div class="section fade">
+<h2>Skills</h2>
+<div class="card" onclick="showHTML()">HTML</div>
+<div class="card" onclick="showCSS()">CSS</div>
+<div class="card" onclick="showJS()">JS</div>
+<div id="output"></div>
 </div>
-</a>
 
-<a href="skills.html">
-<div class="card azul">
-<h3>Skills 💻</h3>
-<p>Minhas habilidades</p>
+<!-- CONVERSOR -->
+<div class="section fade">
+<h2>Conversor 💱</h2>
+
+<input type="number" id="valor" placeholder="Valor">
+<select id="de">
+<option value="real">Real</option>
+<option value="dolar">Dólar</option>
+<option value="euro">Euro</option>
+</select>
+
+<select id="para">
+<option value="dolar">Dólar</option>
+<option value="real">Real</option>
+<option value="euro">Euro</option>
+</select>
+
+<button onclick="converter()">Converter</button>
+
+<div id="resultado"></div>
 </div>
-</a>
 
-<a href="educativo.html">
-<div class="card azul">
-<h3>Conteúdo 📚</h3>
-<p>Dicas e tutoriais</p>
-</div>
-</a>
-
-<a href="jesus.html">
-<div class="card azul">
-<h3>Fé e propósito ✝️</h3>
-<p>Minha base e motivação</p>
-</div>
-</a>
-
-<div class="fade" style="margin-top:100px;">
-<h2>
+<footer>
+Copyright © 2026 Janderf.dev. Todos os direitos reservados
+</footer>
 
 <script>
 
-// FORÇA COMEÇAR NO DARK
+// DARK MODE
 let modo = localStorage.getItem("modo");
+document.body.className = modo === "light" ? "light" : "dark";
 
-if (modo === "light") {
-    document.body.className = "light";
-} else {
-    document.body.className = "dark";
-}
-
-// BOTÃO
 function toggleMode() {
     if (document.body.className === "dark") {
         document.body.className = "light";
-        localStorage.setItem("modo", "light");
+        localStorage.setItem("modo","light");
     } else {
         document.body.className = "dark";
-        localStorage.setItem("modo", "dark");
+        localStorage.setItem("modo","dark");
     }
 }
 
-// ANIMAÇÃO SCROLL
+// ANIMAÇÃO
 const faders = document.querySelectorAll('.fade');
-
 window.addEventListener('scroll', () => {
     faders.forEach(el => {
-        const top = el.getBoundingClientRect().top;
-        if (top < window.innerHeight - 100) {
+        if (el.getBoundingClientRect().top < window.innerHeight - 100) {
             el.classList.add('show');
         }
     });
 });
 
+// SKILLS
+function showHTML() {
+document.getElementById("output").innerText = "<html>...</html>";
+}
+function showCSS() {
+document.getElementById("output").innerText = "body { color:white; }";
+}
+function showJS() {
+document.getElementById("output").innerText = "console.log('JS')";
+}
+
+// CONVERSOR
+function converter(){
+let v = document.getElementById("valor").value;
+document.getElementById("resultado").innerText = v * 5;
+}
+
 </script>
+
+</body>
+</html>
